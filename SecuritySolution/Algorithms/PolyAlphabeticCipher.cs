@@ -4,26 +4,22 @@ using System.Text;
 
 namespace Security.Algorithms
 {
-    public class PolyAlphabeticCipher
-    {
+    public class PolyAlphabeticCipher {
         public string Text { get; set; }
         public string Key { get; set; }
-        public PolyAlphabeticCipher(string text)
-        {
+        public PolyAlphabeticCipher(string text) {
             if (text == null) throw new ArgumentNullException("text");
             Text = text.ToUpper();
             var rnd = new Random();
             var key = new StringBuilder();
-            for (int i = 0; i < text.Length; ++i)
-            {
+            for (int i = 0; i < text.Length; ++i) {
                 char c = (char)('A' + rnd.Next(0, 26));
                 key.Append(c);
             }
             Key = key.ToString();
         }
 
-        public PolyAlphabeticCipher(string text, string key)
-        {
+        public PolyAlphabeticCipher(string text, string key) {
             if (text == null) throw new ArgumentNullException("text");
             if (String.IsNullOrEmpty(key)) throw new ArgumentException("key cannot be empty");
             Text = text.ToUpper();
@@ -32,14 +28,11 @@ namespace Security.Algorithms
 
         static int ToNumber(char c) => c - 'A';
 
-        public string Encrypt()
-        {
+        public string Encrypt() {
             var encryptedText = new StringBuilder();
             int idx = 0;
-            foreach (char t in Text)
-            {
-                if (!t.IsAsciiLetter())
-                {
+            foreach (char t in Text) {
+                if (!t.IsAsciiLetter()) {
                     encryptedText.Append(t);
                     continue;
                 }
@@ -50,16 +43,15 @@ namespace Security.Algorithms
             return encryptedText.ToString();
         }
 
-        public static string Encrypt(string text, string key)
-        {
+        public static string Encrypt(string text, string key) {
             if (text == null) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(key)) throw new ArgumentException("key cannot be empty");
+            text = text.ToUpper();
+            key = key.ToUpper();
             var encryptedText = new StringBuilder();
             int idx = 0;
-            foreach (char t in text)
-            {
-                if (!t.IsAsciiLetter())
-                {
+            foreach (char t in text) {
+                if (!t.IsAsciiLetter()) {
                     encryptedText.Append(t);
                     continue;
                 }
@@ -70,16 +62,14 @@ namespace Security.Algorithms
             return encryptedText.ToString();
         }
 
-        public static string Decrypt(string encryptedText, string key)
-        {
+        public static string Decrypt(string encryptedText, string key) {
             if (encryptedText == null) throw new ArgumentNullException("encryptedText");
             if (string.IsNullOrEmpty(key)) throw new ArgumentException("key cannot be empty");
+            key = key.ToUpper();
             var decryptedText = new StringBuilder();
             int idx = 0;
-            foreach (char c in encryptedText)
-            {
-                if (!c.IsAsciiLetter())
-                {
+            foreach (char c in encryptedText) {
+                if (!c.IsAsciiLetter()) {
                     decryptedText.Append(c);
                     continue;
                 }
