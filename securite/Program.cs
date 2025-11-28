@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Security.Service;
+using Security.ServiceContract;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace securite
+namespace Security
 {
     internal static class Program
     {
@@ -16,7 +16,21 @@ namespace securite
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var factory = BuildFactory();
+
+            Application.Run(new MainForm(factory));
+        }
+        static ICipherFactory BuildFactory()
+        {
+            var services = new List<ICipherService>
+            {
+                new CaesarService(),
+                new MonoAlphabeticService(),
+                new PolyalphabeticService(),
+            };
+
+            return new CipherFactory(services);
         }
     }
 }
