@@ -48,6 +48,7 @@ namespace Security
             this.lblStatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblAlgorithmInfo = new System.Windows.Forms.Label();
             this.lblKeyValidation = new System.Windows.Forms.Label();
+            this.kryptonListBox1 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxAlgorithms)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,9 +215,9 @@ namespace Security
             this.lblKeyHint.AutoSize = true;
             this.lblKeyHint.Location = new System.Drawing.Point(291, 265);
             this.lblKeyHint.Name = "lblKeyHint";
-            this.lblKeyHint.Size = new System.Drawing.Size(60, 29);
+            this.lblKeyHint.Size = new System.Drawing.Size(55, 29);
             this.lblKeyHint.TabIndex = 2;
-            this.lblKeyHint.Text = "Key:";
+            this.lblKeyHint.Text = "Hint";
             // 
             // btnGenerateKey
             // 
@@ -311,7 +312,7 @@ namespace Security
             // 
             this.lblAlgorithmInfo.AutoSize = true;
             this.lblAlgorithmInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlgorithmInfo.Location = new System.Drawing.Point(734, 117);
+            this.lblAlgorithmInfo.Location = new System.Drawing.Point(734, 114);
             this.lblAlgorithmInfo.Name = "lblAlgorithmInfo";
             this.lblAlgorithmInfo.Size = new System.Drawing.Size(235, 20);
             this.lblAlgorithmInfo.TabIndex = 2;
@@ -326,12 +327,44 @@ namespace Security
             this.lblKeyValidation.Size = new System.Drawing.Size(0, 29);
             this.lblKeyValidation.TabIndex = 2;
             // 
+            // kryptonListBox1
+            // 
+            this.kryptonListBox1.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D",
+            "F",
+            "G",
+            "H"});
+            this.kryptonListBox1.ItemStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Cluster;
+            this.kryptonListBox1.Location = new System.Drawing.Point(771, 275);
+            this.kryptonListBox1.Name = "kryptonListBox1";
+            this.kryptonListBox1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
+            this.kryptonListBox1.Size = new System.Drawing.Size(381, 320);
+            this.kryptonListBox1.StateActive.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonListBox1.StateActive.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonListBox1.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonListBox1.StateActive.Border.Rounding = 25;
+            this.kryptonListBox1.StateCheckedNormal.Item.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonListBox1.StateCheckedNormal.Item.Border.Rounding = 25;
+            this.kryptonListBox1.StateCheckedNormal.Item.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.kryptonListBox1.StateCheckedNormal.Item.Content.LongText.Color2 = System.Drawing.Color.White;
+            this.kryptonListBox1.StateCheckedNormal.Item.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonListBox1.StateCheckedNormal.Item.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonListBox1.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1176, 690);
+            this.Controls.Add(this.kryptonListBox1);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnEncryptDecrypt);
@@ -379,6 +412,7 @@ namespace Security
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblStatus;
         private System.Windows.Forms.Label lblAlgorithmInfo;
         private System.Windows.Forms.Label lblKeyValidation;
+        private ComponentFactory.Krypton.Toolkit.KryptonListBox kryptonListBox1;
     }
 }
 
