@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\CaesarCipher.cs" />
+    <Compile Include="Algorithms\PlayFairCipher.cs" />
     <Compile Include="Algorithms\PolyAlphabeticCipher.cs" />
     <Compile Include="Controls\GradientPanel.cs">
       <SubType>Component</SubType>

@@ -1,6 +1,11 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EncryptionAlgos {
+namespace securite.Algorithms {
     public static class PlayFairCipher {
         private static char[,] Matrix;
         private static Dictionary<char, (int row, int col)> LookUp;
@@ -13,23 +18,22 @@ namespace EncryptionAlgos {
             if (!ValidText(key))
                 throw new ArgumentException("key must contain only lower and upper case english letters");
 
-            text = NormalizeText(text);
-            key = NormalizeText(key);
+            text = text.ToUpper();
+            key = key.ToUpper();
 
-            Matrix = new char[5, 5];
+            Matrix = new char[6, 6];
             LookUp = new Dictionary<char, (int, int)>();
 
             var visitedLetters = new SortedSet<Char>();
 
-            for (char i = 'A'; i <= 'Z'; ++i) {
-                if (i == 'J')
-                    continue;
+            for (char i = 'A'; i <= 'Z'; ++i)
                 visitedLetters.Add(i);
-            }
+            for (char i = '0'; i <= '9'; ++i)
+                visitedLetters.Add(i);
 
             int keyIndex = 0;
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
                     while (keyIndex < key.Length && !visitedLetters.Contains(key[keyIndex]))
                         keyIndex++;
                     if (keyIndex < key.Length) {
@@ -86,9 +90,9 @@ namespace EncryptionAlgos {
             var (bi, bj) = LookUp[b];
             int offset = encrypt ? 1 : -1;
             if (ai == bi)
-                return (Matrix[ai, (aj + offset + 5) % 5], Matrix[bi, (bj + offset + 5) % 5]);
+                return (Matrix[ai, (aj + offset + 6) % 6], Matrix[bi, (bj + offset + 6) % 6]);
             else if (aj == bj)
-                return (Matrix[(ai + offset + 5) % 5, aj], Matrix[(bi + offset + 5) % 5, bj]);
+                return (Matrix[(ai + offset + 6) % 6, aj], Matrix[(bi + offset + 6) % 6, bj]);
             else
                 return (Matrix[ai, bj], Matrix[bi, aj]);
         }
@@ -98,24 +102,28 @@ namespace EncryptionAlgos {
             int end = GetLastIndex(word.Length);
             var set = new SortedSet<(int, string)>();
             for (int i = start; i <= end; ++i) {
-                int wordScore = WordScore(EnableDictionary[i], word);
+                int wordScore = WordScore(word, EnableDictionary[i]);
                 set.Add((wordScore, EnableDictionary[i]));
-                if (set.Count > 10)
-                    set.Remove(set.Max);
             }
             var res = new List<string>();
-            foreach (var (sc, w) in set)
+            foreach (var (sc, w) in set) {
                 res.Add(w);
+                if (res.Count == 10) break;
+            }
             return res;
         }
-
         private static int WordScore(string dictionaryWord, string word) {
             int score = 0, idx = 0;
+            for (int i = 0; i < Math.Min(dictionaryWord.Length, word.Length); ++i) {
+                if (dictionaryWord[i] != word[i])
+                    break;
+                score -= 1;
+            }
             foreach (var c in word) {
                 if (idx < dictionaryWord.Length && c == dictionaryWord[idx])
                     ++idx;
                 else if (c == 'X')
-                    ++score;
+                    score += 1;
                 else
                     score += 10;
             }
@@ -164,19 +172,10 @@ namespace EncryptionAlgos {
                 sb.Append('X');
             return sb.ToString();
         }
-        private static string NormalizeText(string text) {
-            var sb = new StringBuilder(text);
-            for (int i = 0; i < sb.Length; i++) {
-                sb[i] = Char.ToUpper(sb[i]);
-                if (sb[i] == 'J')
-                    sb[i] = 'I';
-            }
-            return sb.ToString();
-        }
 
         private static bool ValidText(string text) {
             foreach (char c in text) {
-                if (!Char.IsUpper(c))
+                if (!(Char.IsUpper(c) || Char.IsDigit(c)))
                     return false;
             }
             return true;
