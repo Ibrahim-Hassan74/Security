@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace securite.Algorithms {
     public static class PlayFairCipher {
+        private static readonly char Filler = '9';
+        private static readonly int MatrixSize = 6;
         private static char[,] Matrix;
         private static Dictionary<char, (int row, int col)> LookUp;
         private static List<string> EnableDictionary;
@@ -21,7 +23,7 @@ namespace securite.Algorithms {
             text = text.ToUpper();
             key = key.ToUpper();
 
-            Matrix = new char[6, 6];
+            Matrix = new char[MatrixSize, MatrixSize];
             LookUp = new Dictionary<char, (int, int)>();
 
             var visitedLetters = new SortedSet<Char>();
@@ -32,8 +34,8 @@ namespace securite.Algorithms {
                 visitedLetters.Add(i);
 
             int keyIndex = 0;
-            for (int i = 0; i < 6; i++) {
-                for (int j = 0; j < 6; j++) {
+            for (int i = 0; i < MatrixSize; i++) {
+                for (int j = 0; j < MatrixSize; j++) {
                     while (keyIndex < key.Length && !visitedLetters.Contains(key[keyIndex]))
                         keyIndex++;
                     if (keyIndex < key.Length) {
@@ -81,7 +83,7 @@ namespace securite.Algorithms {
                 sb.Append(a);
                 sb.Append(b);
             }
-            var decryptedText = sb.ToString();
+            var decryptedText = Clean(sb.ToString());
             return (decryptedText, CloseWords(decryptedText));
         }
 
@@ -90,19 +92,19 @@ namespace securite.Algorithms {
             var (bi, bj) = LookUp[b];
             int offset = encrypt ? 1 : -1;
             if (ai == bi)
-                return (Matrix[ai, (aj + offset + 6) % 6], Matrix[bi, (bj + offset + 6) % 6]);
+                return (Matrix[ai, (aj + offset + MatrixSize) % MatrixSize], Matrix[bi, (bj + offset + MatrixSize) % MatrixSize]);
             else if (aj == bj)
-                return (Matrix[(ai + offset + 6) % 6, aj], Matrix[(bi + offset + 6) % 6, bj]);
+                return (Matrix[(ai + offset + MatrixSize) % MatrixSize, aj], Matrix[(bi + offset + MatrixSize) % MatrixSize, bj]);
             else
                 return (Matrix[ai, bj], Matrix[bi, aj]);
         }
 
         private static List<string> CloseWords(string word) {
-            int start = GetFirstIndex(word.Length - word.Count(c => c == 'X'));
+            int start = GetFirstIndex(word.Length - word.Count(c => c == Filler));
             int end = GetLastIndex(word.Length);
             var set = new SortedSet<(int, string)>();
             for (int i = start; i <= end; ++i) {
-                int wordScore = WordScore(word, EnableDictionary[i]);
+                int wordScore = WordScore(EnableDictionary[i], word);
                 set.Add((wordScore, EnableDictionary[i]));
             }
             var res = new List<string>();
@@ -112,7 +114,9 @@ namespace securite.Algorithms {
             }
             return res;
         }
-        private static int WordScore(string dictionaryWord, string word) {
+        public static int WordScore(string dictionaryWord, string word) {
+            if (dictionaryWord == word)
+                return int.MinValue;
             int score = 0, idx = 0;
             for (int i = 0; i < Math.Min(dictionaryWord.Length, word.Length); ++i) {
                 if (dictionaryWord[i] != word[i])
@@ -122,12 +126,21 @@ namespace securite.Algorithms {
             foreach (var c in word) {
                 if (idx < dictionaryWord.Length && c == dictionaryWord[idx])
                     ++idx;
-                else if (c == 'X')
-                    score += 1;
+                else if (Char.IsDigit(c))
+                    continue;
                 else
-                    score += 10;
+                    score += 1;
             }
             return score;
+        }
+
+        private static string Clean(string word) {
+            var sb = new StringBuilder();
+            foreach (var c in word) {
+                if (!Char.IsDigit(c))
+                    sb.Append(c);
+            }
+            return sb.ToString();
         }
 
         private static int GetFirstIndex(int wordLength) {
@@ -165,11 +178,11 @@ namespace securite.Algorithms {
             sb.Append(text[0]);
             for (int i = 1; i < text.Length; i++) {
                 if (text[i] == sb[sb.Length - 1] && sb.Length % 2 != 0)
-                    sb.Append('X');
+                    sb.Append(Filler);
                 sb.Append(text[i]);
             }
             if (sb.Length % 2 != 0)
-                sb.Append('X');
+                sb.Append(Filler);
             return sb.ToString();
         }
 
