@@ -2,7 +2,7 @@
 
 namespace Security
 {
-    partial class MainForm
+    partial class CipherAlgorithmsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace Security
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CipherAlgorithmsForm));
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.typeTimer = new System.Windows.Forms.Timer(this.components);
             this.txtKey = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -48,7 +48,8 @@ namespace Security
             this.lblStatus = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblAlgorithmInfo = new System.Windows.Forms.Label();
             this.lblKeyValidation = new System.Windows.Forms.Label();
-            this.kryptonListBox1 = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
+            this.listDecryption = new ComponentFactory.Krypton.Toolkit.KryptonListBox();
+            this.bruteForce = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxAlgorithms)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +92,7 @@ namespace Security
             // 
             // txtKey
             // 
-            this.txtKey.Location = new System.Drawing.Point(296, 193);
+            this.txtKey.Location = new System.Drawing.Point(260, 188);
             this.txtKey.Multiline = true;
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(408, 44);
@@ -116,7 +117,7 @@ namespace Security
             // lblKey
             // 
             this.lblKey.AutoSize = true;
-            this.lblKey.Location = new System.Drawing.Point(53, 208);
+            this.lblKey.Location = new System.Drawing.Point(17, 203);
             this.lblKey.Name = "lblKey";
             this.lblKey.Size = new System.Drawing.Size(60, 29);
             this.lblKey.TabIndex = 2;
@@ -136,7 +137,7 @@ namespace Security
             this.comboBoxAlgorithms.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
             this.comboBoxAlgorithms.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Ribbon;
             this.comboBoxAlgorithms.ItemStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
-            this.comboBoxAlgorithms.Location = new System.Drawing.Point(296, 109);
+            this.comboBoxAlgorithms.Location = new System.Drawing.Point(260, 104);
             this.comboBoxAlgorithms.Name = "comboBoxAlgorithms";
             this.comboBoxAlgorithms.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
             this.comboBoxAlgorithms.Size = new System.Drawing.Size(408, 44);
@@ -171,7 +172,7 @@ namespace Security
             // lblAlgorithm
             // 
             this.lblAlgorithm.AutoSize = true;
-            this.lblAlgorithm.Location = new System.Drawing.Point(53, 109);
+            this.lblAlgorithm.Location = new System.Drawing.Point(17, 104);
             this.lblAlgorithm.Name = "lblAlgorithm";
             this.lblAlgorithm.Size = new System.Drawing.Size(205, 29);
             this.lblAlgorithm.TabIndex = 2;
@@ -179,7 +180,7 @@ namespace Security
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(296, 334);
+            this.txtInput.Location = new System.Drawing.Point(260, 329);
             this.txtInput.Multiline = true;
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(408, 182);
@@ -204,7 +205,7 @@ namespace Security
             // lblInput
             // 
             this.lblInput.AutoSize = true;
-            this.lblInput.Location = new System.Drawing.Point(53, 349);
+            this.lblInput.Location = new System.Drawing.Point(17, 344);
             this.lblInput.Name = "lblInput";
             this.lblInput.Size = new System.Drawing.Size(66, 29);
             this.lblInput.TabIndex = 2;
@@ -213,7 +214,7 @@ namespace Security
             // lblKeyHint
             // 
             this.lblKeyHint.AutoSize = true;
-            this.lblKeyHint.Location = new System.Drawing.Point(291, 265);
+            this.lblKeyHint.Location = new System.Drawing.Point(255, 260);
             this.lblKeyHint.Name = "lblKeyHint";
             this.lblKeyHint.Size = new System.Drawing.Size(55, 29);
             this.lblKeyHint.TabIndex = 2;
@@ -222,7 +223,7 @@ namespace Security
             // btnGenerateKey
             // 
             this.btnGenerateKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenerateKey.Location = new System.Drawing.Point(771, 193);
+            this.btnGenerateKey.Location = new System.Drawing.Point(726, 188);
             this.btnGenerateKey.Name = "btnGenerateKey";
             this.btnGenerateKey.Size = new System.Drawing.Size(142, 44);
             this.btnGenerateKey.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
@@ -248,7 +249,7 @@ namespace Security
             // btnEncryptDecrypt
             // 
             this.btnEncryptDecrypt.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEncryptDecrypt.Location = new System.Drawing.Point(296, 551);
+            this.btnEncryptDecrypt.Location = new System.Drawing.Point(260, 546);
             this.btnEncryptDecrypt.Name = "btnEncryptDecrypt";
             this.btnEncryptDecrypt.Size = new System.Drawing.Size(142, 44);
             this.btnEncryptDecrypt.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
@@ -274,7 +275,7 @@ namespace Security
             // btnClear
             // 
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.Location = new System.Drawing.Point(562, 551);
+            this.btnClear.Location = new System.Drawing.Point(526, 546);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(142, 44);
             this.btnClear.StateCommon.Back.Color1 = System.Drawing.Color.Ivory;
@@ -299,7 +300,7 @@ namespace Security
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(296, 641);
+            this.lblStatus.Location = new System.Drawing.Point(265, 630);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(75, 28);
             this.lblStatus.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -312,7 +313,7 @@ namespace Security
             // 
             this.lblAlgorithmInfo.AutoSize = true;
             this.lblAlgorithmInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlgorithmInfo.Location = new System.Drawing.Point(734, 114);
+            this.lblAlgorithmInfo.Location = new System.Drawing.Point(722, 111);
             this.lblAlgorithmInfo.Name = "lblAlgorithmInfo";
             this.lblAlgorithmInfo.Size = new System.Drawing.Size(235, 20);
             this.lblAlgorithmInfo.TabIndex = 2;
@@ -327,44 +328,81 @@ namespace Security
             this.lblKeyValidation.Size = new System.Drawing.Size(0, 29);
             this.lblKeyValidation.TabIndex = 2;
             // 
-            // kryptonListBox1
+            // listDecryption
             // 
-            this.kryptonListBox1.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D",
-            "F",
-            "G",
-            "H"});
-            this.kryptonListBox1.ItemStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Cluster;
-            this.kryptonListBox1.Location = new System.Drawing.Point(771, 275);
-            this.kryptonListBox1.Name = "kryptonListBox1";
-            this.kryptonListBox1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Silver;
-            this.kryptonListBox1.Size = new System.Drawing.Size(381, 320);
-            this.kryptonListBox1.StateActive.Back.Color1 = System.Drawing.Color.White;
-            this.kryptonListBox1.StateActive.Back.Color2 = System.Drawing.Color.White;
-            this.kryptonListBox1.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.listDecryption.ItemStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Form;
+            this.listDecryption.Location = new System.Drawing.Point(783, 238);
+            this.listDecryption.Name = "listDecryption";
+            this.listDecryption.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2010Silver;
+            this.listDecryption.Size = new System.Drawing.Size(381, 320);
+            this.listDecryption.StateActive.Back.Color1 = System.Drawing.Color.White;
+            this.listDecryption.StateActive.Back.Color2 = System.Drawing.Color.White;
+            this.listDecryption.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonListBox1.StateActive.Border.Rounding = 25;
-            this.kryptonListBox1.StateCheckedNormal.Item.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.listDecryption.StateActive.Border.Rounding = 25;
+            this.listDecryption.StateCheckedNormal.Item.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonListBox1.StateCheckedNormal.Item.Border.Rounding = 25;
-            this.kryptonListBox1.StateCheckedNormal.Item.Content.LongText.Color1 = System.Drawing.Color.White;
-            this.kryptonListBox1.StateCheckedNormal.Item.Content.LongText.Color2 = System.Drawing.Color.White;
-            this.kryptonListBox1.StateCheckedNormal.Item.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonListBox1.StateCheckedNormal.Item.Content.ShortText.Color2 = System.Drawing.Color.White;
-            this.kryptonListBox1.TabIndex = 7;
+            this.listDecryption.StateCheckedNormal.Item.Border.Rounding = 25;
+            this.listDecryption.StateCheckedNormal.Item.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedNormal.Item.Content.LongText.Color2 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedNormal.Item.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedNormal.Item.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedPressed.Item.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.listDecryption.StateCheckedPressed.Item.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.listDecryption.StateCheckedPressed.Item.Content.LongText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.listDecryption.StateCheckedPressed.Item.Content.LongText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.listDecryption.StateCheckedPressed.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.listDecryption.StateCheckedPressed.Item.Content.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.listDecryption.StateCheckedTracking.Item.Back.Color1 = System.Drawing.Color.Lime;
+            this.listDecryption.StateCheckedTracking.Item.Back.Color2 = System.Drawing.Color.SpringGreen;
+            this.listDecryption.StateCheckedTracking.Item.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedTracking.Item.Content.LongText.Color2 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedTracking.Item.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listDecryption.StateCheckedTracking.Item.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedTracking.Item.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.listDecryption.StateCheckedTracking.Item.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listDecryption.StateCommon.Item.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listDecryption.StateCommon.Item.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listDecryption.TabIndex = 7;
+            this.listDecryption.Visible = false;
             // 
-            // MainForm
+            // bruteForce
+            // 
+            this.bruteForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bruteForce.Location = new System.Drawing.Point(920, 564);
+            this.bruteForce.Name = "bruteForce";
+            this.bruteForce.Size = new System.Drawing.Size(142, 44);
+            this.bruteForce.StateCommon.Back.Color1 = System.Drawing.Color.AliceBlue;
+            this.bruteForce.StateCommon.Back.Color2 = System.Drawing.Color.MintCream;
+            this.bruteForce.StateCommon.Border.Color1 = System.Drawing.Color.Black;
+            this.bruteForce.StateCommon.Border.Color2 = System.Drawing.Color.Black;
+            this.bruteForce.StateCommon.Border.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.True;
+            this.bruteForce.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.bruteForce.StateCommon.Border.Rounding = 25;
+            this.bruteForce.StateCommon.Border.Width = 1;
+            this.bruteForce.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.bruteForce.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
+            this.bruteForce.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bruteForce.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.bruteForce.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.bruteForce.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bruteForce.TabIndex = 8;
+            this.bruteForce.Values.Text = "Brute Force";
+            this.bruteForce.Visible = false;
+            this.bruteForce.Click += new System.EventHandler(this.bruteForce_Click);
+            // 
+            // CipherAlgorithmsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1176, 690);
-            this.Controls.Add(this.kryptonListBox1);
+            this.Controls.Add(this.bruteForce);
+            this.Controls.Add(this.listDecryption);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnEncryptDecrypt);
@@ -381,7 +419,7 @@ namespace Security
             this.Controls.Add(this.txtKey);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "MainForm";
+            this.Name = "CipherAlgorithmsForm";
             this.Palette = this.kryptonPalette1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
@@ -412,7 +450,8 @@ namespace Security
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblStatus;
         private System.Windows.Forms.Label lblAlgorithmInfo;
         private System.Windows.Forms.Label lblKeyValidation;
-        private ComponentFactory.Krypton.Toolkit.KryptonListBox kryptonListBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonListBox listDecryption;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton bruteForce;
     }
 }
 

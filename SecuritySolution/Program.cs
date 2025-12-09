@@ -17,20 +17,11 @@ namespace Security
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var factory = BuildFactory();
+            var mainForm = new MainForm();
 
-            Application.Run(new MainForm(factory));
-        }
-        static ICipherFactory BuildFactory()
-        {
-            var services = new List<ICipherService>
-            {
-                new CaesarService(),
-                new MonoAlphabeticService(),
-                new PolyalphabeticService(),
-            };
-
-            return new CipherFactory(services);
+            //var passwordChecker = new PasswordCheckerForm();
+            //var sqlInjector = new SqlInjectionForm();
+            Application.Run(mainForm);
         }
     }
 }

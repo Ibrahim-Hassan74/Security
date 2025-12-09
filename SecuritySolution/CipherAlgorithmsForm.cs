@@ -1,4 +1,6 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using Security.Algorithms;
+using Security.Service;
 using Security.ServiceContract;
 using System;
 using System.Drawing;
@@ -6,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Security
 {
-    public partial class MainForm : KryptonForm
+    public partial class CipherAlgorithmsForm : KryptonForm
     {
         private readonly ICipherFactory _factory;
         private string lastCipherText;
@@ -14,7 +16,7 @@ namespace Security
         private string lastKeyUsed;
         private bool currentlyEncrypted = false;
 
-        public MainForm(ICipherFactory factory)
+        public CipherAlgorithmsForm(ICipherFactory factory)
         {
             _factory = factory;
             InitializeComponent();
@@ -150,6 +152,16 @@ namespace Security
                     lblStatus.Text = $"Encrypted with {svc.Name}.";
                     btnGenerateKey.Enabled = false;
                     txtKey.Enabled = false;
+                    if(svc is PlayFairService)
+                    {
+                        listDecryption.Visible = false;
+                        listDecryption.Items.Clear();
+                    }
+                    if(svc is CaesarService)
+                    {
+                        listDecryption.Visible = true;
+                        bruteForce.Visible = true;
+                    }
                 }
                 else
                 {
@@ -171,11 +183,29 @@ namespace Security
                     var plain = svcForDecrypt.Decrypt(lastCipherText, keyToUse);
                     txtInput.Text = plain;
 
+                    if (svcForDecrypt is PlayFairService pfService)
+                    {
+                        listDecryption.Visible = true;
+                        listDecryption.Items.Clear();
+
+                        foreach (var w in pfService.LastCloseWords)
+                        {
+                            listDecryption.Items.Add(w);
+                        }
+                    }
+
+                    if (svcForDecrypt is CaesarService)
+                    {
+                        listDecryption.Items.Clear();
+                        listDecryption.Visible = false;
+                        bruteForce.Visible = false;
+                    }
                     currentlyEncrypted = false;
                     btnEncryptDecrypt.Text = "Encrypt";
                     lblStatus.Text = $"Decrypted (algorithm: {svcForDecrypt.Name}).";
                     btnGenerateKey.Enabled = true;
                     txtKey.Enabled = true;
+                    bruteForce.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -190,15 +220,23 @@ namespace Security
             txtKey.Clear();
             lastCipherText = null;
             lastAlgorithmId = null;
+            listDecryption.Items.Clear();
+            listDecryption.Visible = false;
             lastKeyUsed = null;
             currentlyEncrypted = false;
             btnEncryptDecrypt.Text = "Encrypt";
             lblStatus.Text = "Ready";
+            bruteForce.Visible = false;
+            btnGenerateKey.Enabled = true;
+            txtKey.Enabled = true;
         }
         private void comboBoxAlgorithms_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtInput.Clear();
             txtKey.Clear();
+            listDecryption.Items.Clear();
+            listDecryption.Visible = false;
+            bruteForce.Visible = false;
 
             SetPlaceholder(txtInput, txtInput.Tag?.ToString() ?? "");
             SetPlaceholder(txtKey, txtKey.Tag?.ToString() ?? "");
@@ -222,15 +260,15 @@ namespace Security
             if (svc == null)
                 return;
 
-            if (svc.RequiresKey)
+            if (svc is HillService || svc is MonoAlphabeticService || svc is AffineService)
             {
                 txtKey.Enabled = true;
-                btnGenerateKey.Visible = false;
+                btnGenerateKey.Visible = true;
             }
             else
             {
-                txtKey.Enabled = true;         
-                btnGenerateKey.Visible = true; 
+                txtKey.Enabled = true;
+                btnGenerateKey.Visible = false;
             }
 
             lblKeyHint.Text = $"Hint: {svc.KeyHint ?? "No key required"}";
@@ -242,6 +280,50 @@ namespace Security
 
             SetPlaceholder(txtKey, txtKey.Tag?.ToString() ?? "");
             SetPlaceholder(txtInput, txtInput.Tag?.ToString() ?? "");
+        }
+
+        private void bruteForce_Click(object sender, EventArgs e)
+        {
+            var svcForDecrypt = _factory.GetById("Caesar");
+            if (svcForDecrypt is CaesarService pfService)
+            {
+                var svc = comboBoxAlgorithms.SelectedItem as ICipherService;
+                listDecryption.Items.Clear();
+                var inputText = txtInput.Text;
+                var selectedText = svc.Decrypt(inputText, txtKey.Text);
+                var listDecryptionResults = CaesarCipher.Decrypt(inputText);
+                foreach (var w in listDecryptionResults)
+                {
+                    listDecryption.Items.Add(w);
+                    if (w == selectedText)
+                    {
+                        listDecryption.SelectedItem = w;
+                        listDecryption.ItemStyle = ButtonStyle.Standalone;
+                    }
+                }
+            }
+        }
+
+        private void btnPasswordCheckerForm_Click(object sender, EventArgs e)
+        {
+            var form = new PasswordCheckerForm();
+
+            form.FormClosed += (s, args) =>
+            {
+                this.Show();
+            };
+
+            this.Hide();
+            form.Show();
+        }
+
+
+        private void btnSqlInjectionForm_Click(object sender, EventArgs e)
+        {
+            var form = new SqlInjectionForm();
+            form.FormClosed += (s, args) => this.Show();
+            this.Hide();
+            form.Show();
         }
 
     }
