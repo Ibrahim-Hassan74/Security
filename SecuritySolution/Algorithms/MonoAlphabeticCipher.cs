@@ -12,44 +12,6 @@ namespace Security.Algorithms
         public string Key { get; set; }
         public Dictionary<char, char> dict;
 
-        public MonoAlphabeticCipher(string text)
-        {
-            if (text == null) throw new ArgumentNullException("text");
-            Text = text;
-            var key = new StringBuilder();
-            for (char c = 'a'; c <= 'z'; ++c)
-                key.Append(c);
-            for (char c = 'A'; c <= 'Z'; ++c)
-                key.Append(c);
-            var rnd = new Random();
-            for (int i = 0; i < key.Length; ++i)
-            {
-                int j = rnd.Next(0, key.Length);
-                (key[i], key[j]) = (key[j], key[i]);
-            }
-            dict = new Dictionary<char, char>();
-            int idx = 0;
-            for (char c = 'a'; c <= 'z'; ++c)
-                dict.Add(c, key[idx++]);
-            for (char c = 'A'; c <= 'Z'; ++c)
-                dict.Add(c, key[idx++]);
-            Key = key.ToString();
-        }
-        public string Encrypt()
-        {
-            var encryptedText = new StringBuilder();
-            foreach (char t in Text)
-            {
-                if (!t.IsAsciiLetter())
-                {
-                    encryptedText.Append(t);
-                    continue;
-                }
-                encryptedText.Append(dict[t]);
-            }
-            return encryptedText.ToString();
-        }
-
         public static string Encrypt(string text, string key)
         {
             if (text == null) throw new ArgumentNullException("text");
@@ -101,6 +63,8 @@ namespace Security.Algorithms
             return decryptedText.ToString();
         }
 
+        private static bool ValidChar(char c) => (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+
         static bool ValidKey(string key)
         {
             if (key.Length != 52) return false;
@@ -112,7 +76,7 @@ namespace Security.Algorithms
             for (char c = 'A'; c <= 'Z'; ++c)
                 if (!st.Contains(c)) return false;
             foreach (char c in key)
-                if (!c.IsAsciiLetter()) return false;
+                if (!ValidChar(c)) return false;
             return true;
         }
     }

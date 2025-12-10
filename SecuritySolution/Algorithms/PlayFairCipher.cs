@@ -218,11 +218,14 @@ namespace Security.Algorithms
             return sb.ToString();
         }
 
+
+        private static bool ValidChar(char c) => (c >= 'A' && c <= 'Z');
+
         private static bool ValidText(string text)
         {
             foreach (char c in text)
             {
-                if (!(Char.IsUpper(c) || Char.IsDigit(c)))
+                if (!(ValidChar(c) || Char.IsDigit(c)))
                     return false;
             }
             return true;

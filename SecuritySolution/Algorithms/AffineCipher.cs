@@ -50,11 +50,10 @@ namespace Security.Algorithms
                 return (char)(n + 'a');
             return (char)(n - 26 + 'A');
         }
-        private static bool ValidText(string text)
-        {
-            foreach (char c in text)
-            {
-                if (!(Char.IsUpper(c) || Char.IsLower(c)))
+        private static bool ValidChar(char c) => (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+        private static bool ValidText(string text) {
+            foreach (char c in text) {
+                if (!ValidChar(c))
                     return false;
             }
             return true;

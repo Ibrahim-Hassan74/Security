@@ -68,11 +68,10 @@ namespace Security.Algorithms
             return decryptedText.ToString();
         }
 
-        private static bool ValidText(string text)
-        {
-            foreach (char c in text)
-            {
-                if (!Char.IsUpper(c))
+        private static bool ValidChar(char c) => (c >= 'A' && c <= 'Z');
+        private static bool ValidText(string text) {
+            foreach (char c in text) {
+                if (!ValidChar(c))
                     return false;
             }
             return true;
