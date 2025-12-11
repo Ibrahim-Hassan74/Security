@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\AffineCipher.cs" />
+    <Compile Include="Algorithms\BeauforCipher.cs" />
     <Compile Include="Algorithms\CaesarCipher.cs" />
     <Compile Include="Algorithms\HillCipher.cs" />
     <Compile Include="Algorithms\PlayFairCipher.cs" />
