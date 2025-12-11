@@ -2,60 +2,91 @@
 using Security.Models;
 using Security.ServiceContract;
 using System;
-using System.Text;
+using System.Linq;
+using System.Security.Cryptography;
 
 namespace Security.Service
 {
     public class MonoAlphabeticService : ICipherService
     {
-        public string Id => "Mono";
-        public string Name => "Monoalphabetic Cipher";
-        public bool RequiresKey => false;
-        public string KeyHint => "52 letters (a..z A..Z)";
+        public string Id => "MonoAlphabetic";
+        public string Name => "Monoalphabetic Substitution Cipher";
+        public bool RequiresKey => true;
+        public string KeyHint => "52 characters: a..z followed by A..Z in some permutation (e.g. \"qwerty...QWERTY...\")";
 
         public string GenerateKey()
         {
-            var sb = new StringBuilder();
-            for (char c = 'a'; c <= 'z'; ++c) sb.Append(c);
-            for (char c = 'A'; c <= 'Z'; ++c) sb.Append(c);
-            var arr = sb.ToString().ToCharArray();
-            var rnd = new Random();
-            for (int i = 0; i < arr.Length; ++i)
+            var pool = Enumerable.Range('a', 26).Select(i => (char)i)
+                       .Concat(Enumerable.Range('A', 26).Select(i => (char)i))
+                       .ToArray();
+
+            using (var rng = RandomNumberGenerator.Create())
             {
-                int j = rnd.Next(0, arr.Length);
-                (arr[i], arr[j]) = (arr[j], arr[i]);
+                for (int i = pool.Length - 1; i > 0; i--)
+                {
+                    byte[] b = new byte[4];
+                    rng.GetBytes(b);
+                    int r = (int) BitConverter.ToUInt32(b, 0) % (i + 1);
+                    var tmp = pool[r];
+                    pool[r] = pool[i];
+                    pool[i] = tmp;
+                }
             }
-            return new string(arr);
+
+            return new string(pool);
         }
 
         public EncryptionResult Encrypt(string plaintext, string key = null)
         {
-            if (string.IsNullOrEmpty(key))
-            {
-                var mac = new MonoAlphabeticCipher(plaintext);
+            if (string.IsNullOrWhiteSpace(plaintext))
+                throw new ArgumentException("Plaintext cannot be empty.", nameof(plaintext));
 
-                return new EncryptionResult
-                {
-                    AlgorithmId = Id,
-                    UsedKey = mac.Key,
-                    Ciphertext = mac.Encrypt()
-                };
-            }
-            else
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Monoalphabetic cipher requires a key.", nameof(key));
+
+            if (!MonoAlphabeticCipher.ValidKey(key))
+                throw new ArgumentException("Invalid key. Key must be 52 characters long and contain every letter a..z and A..Z exactly once.");
+
+            string ciphertext;
+            try
             {
-                var enc = MonoAlphabeticCipher.Encrypt(plaintext, key);
-                return new EncryptionResult
-                {
-                    AlgorithmId = Id,
-                    UsedKey = key,
-                    Ciphertext = enc
-                };
+                ciphertext = MonoAlphabeticCipher.Encrypt(plaintext, key);
             }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Monoalphabetic encryption failed.", ex);
+            }
+
+            return new EncryptionResult
+            {
+                AlgorithmId = Id,
+                Ciphertext = ciphertext,
+                UsedKey = key
+            };
         }
 
         public string Decrypt(string ciphertext, string key)
         {
-            return MonoAlphabeticCipher.Decrypt(ciphertext, key);
+            if (string.IsNullOrWhiteSpace(ciphertext))
+                throw new ArgumentException("Ciphertext cannot be empty.", nameof(ciphertext));
+
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentException("Monoalphabetic cipher requires a key.", nameof(key));
+
+            if (!MonoAlphabeticCipher.ValidKey(key))
+                throw new ArgumentException("Invalid key. Key must be 52 characters long and contain every letter a..z and A..Z exactly once.");
+
+            string plain;
+            try
+            {
+                plain = MonoAlphabeticCipher.Decrypt(ciphertext, key);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Monoalphabetic decryption failed.", ex);
+            }
+
+            return plain;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace securite.Algorithms {
+namespace Security.Algorithms {
     public static class BeauforCipher {
         public static string Encrypt(string text, string key) {
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");

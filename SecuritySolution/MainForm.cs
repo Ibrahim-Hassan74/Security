@@ -21,7 +21,9 @@ namespace Security
                 new PolyalphabeticService(),
                 new PlayFairService(),
                 new HillService(),
-                new AffineService()
+                new AffineService(), 
+                new BeaufortService(),
+                new RsaService()
             };
 
             return new CipherFactory(services);

@@ -65,7 +65,7 @@ namespace Security.Algorithms
 
         private static bool ValidChar(char c) => (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 
-        static bool ValidKey(string key)
+        public static bool ValidKey(string key)
         {
             if (key.Length != 52) return false;
             var st = new HashSet<char>();
