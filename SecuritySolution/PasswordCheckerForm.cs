@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Security.ServiceContract;
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace Security
 {
@@ -50,6 +50,11 @@ namespace Security
 
 
         private void btnGenerateKey_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtKey_TextChanged(object sender, EventArgs e)
         {
 
         }

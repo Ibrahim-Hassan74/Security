@@ -1,4 +1,4 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using Krypton.Toolkit;
 using Security.Algorithms;
 using Security.Service;
 using Security.ServiceContract;
@@ -105,7 +105,7 @@ namespace Security
                 return;
             }
 
-            if(svc.Name == "Polyalphabetic (Vigenère)")
+            if (svc.Name == "Polyalphabetic (Vigenère)")
             {
                 string key = txtKey.Text;
                 if (!string.IsNullOrEmpty(key))
@@ -152,12 +152,12 @@ namespace Security
                     lblStatus.Text = $"Encrypted with {svc.Name}.";
                     btnGenerateKey.Enabled = false;
                     txtKey.Enabled = false;
-                    if(svc is PlayFairService)
+                    if (svc is PlayFairService)
                     {
                         listDecryption.Visible = false;
                         listDecryption.Items.Clear();
                     }
-                    if(svc is CaesarService)
+                    if (svc is CaesarService)
                     {
                         listDecryption.Visible = true;
                         bruteForce.Visible = true;
@@ -326,6 +326,15 @@ namespace Security
             form.Show();
         }
 
+        private void CipherAlgorithmsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CipherAlgorithmsForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

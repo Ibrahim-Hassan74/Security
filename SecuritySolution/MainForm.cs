@@ -2,7 +2,7 @@
 using Security.Service;
 using Security.ServiceContract;
 using System.Collections.Generic;
-using ComponentFactory.Krypton.Toolkit;
+using Krypton.Toolkit;
 
 namespace Security
 {

@@ -26,7 +26,7 @@ namespace Security.Service
                 {
                     byte[] b = new byte[4];
                     rng.GetBytes(b);
-                    int r = (int) BitConverter.ToUInt32(b, 0) % (i + 1);
+                    var r = BitConverter.ToUInt32(b, 0) % (i + 1);
                     var tmp = pool[r];
                     pool[r] = pool[i];
                     pool[i] = tmp;

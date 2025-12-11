@@ -9,7 +9,7 @@ namespace Security.Algorithms {
         public static string Encrypt(string text, string key) {
             if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException("key");
-            if (ValidText(key)) throw new ArgumentException("key must contain only lower and upper case english letters");
+            if (!ValidText(key)) throw new ArgumentException("key must contain only lower and upper case english letters");
             var sb = new StringBuilder(text.Length);
             int keyIdx = 0;
             foreach (char c in text) {

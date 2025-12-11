@@ -18,7 +18,6 @@ namespace Security
             Application.SetCompatibleTextRenderingDefault(false);
 
             var mainForm = new MainForm();
-
             //var passwordChecker = new PasswordCheckerForm();
             //var sqlInjector = new SqlInjectionForm();
             Application.Run(mainForm);
