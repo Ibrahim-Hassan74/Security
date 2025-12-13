@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Krypton.Toolkit;
+using Security.Models;
 using Security.Service;
 using Security.ServiceContract;
+using System;
 using System.Collections.Generic;
-using Krypton.Toolkit;
-using Security.Models;
+using System.Drawing;
 
 namespace Security
 {
@@ -14,6 +15,8 @@ namespace Security
         {
             _db = db;
             InitializeComponent();
+            InternalPanel.StateCommon.Color1 = Color.FromArgb(240, 240, 240);
+            InternalPanel.StateCommon.Color2 = Color.FromArgb(240, 240, 240);
         }
         private static ICipherFactory BuildFactory()
         {

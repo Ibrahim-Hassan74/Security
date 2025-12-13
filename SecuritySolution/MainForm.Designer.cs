@@ -1,4 +1,5 @@
 ﻿using Security.Controls;
+using System.Drawing;
 
 namespace Security
 {
@@ -30,156 +31,119 @@ namespace Security
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            //this.kryptonPalette1 = new Krypton.Toolkit.KryptonPalette(this.components);
-            this.typeTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnPasswordCheckerForm = new Krypton.Toolkit.KryptonButton();
-            this.btnSqlInjectionForm = new Krypton.Toolkit.KryptonButton();
-            this.btnCipherAlgorithmsForm = new Krypton.Toolkit.KryptonButton();
-            this.SuspendLayout();
-            // 
-            // kryptonPalette1
-            // 
-            //this.kryptonPalette1.ButtonSpecs.FormClose.Image = ((System.Drawing.Image)(resources.GetObject("kryptonPalette1.ButtonSpecs.FormClose.Image")));
-            //this.kryptonPalette1.ButtonSpecs.FormMax.Image = ((System.Drawing.Image)(resources.GetObject("kryptonPalette1.ButtonSpecs.FormMax.Image")));
-            //this.kryptonPalette1.ButtonSpecs.FormMin.Image = ((System.Drawing.Image)(resources.GetObject("kryptonPalette1.ButtonSpecs.FormMin.Image")));
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.Color1 = System.Drawing.Color.White;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.Color2 = System.Drawing.Color.White;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Left) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Right)));
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.Width = 0;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.Color1 = System.Drawing.Color.White;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.Color2 = System.Drawing.Color.White;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Left) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Right)));
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.Width = 0;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.Color1 = System.Drawing.Color.White;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.Color2 = System.Drawing.Color.White;
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Left) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Right)));
-            //this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.Width = 0;
-            //this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            //this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            //this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Left) 
-            //| Krypton.Toolkit.PaletteDrawBorders.Right)));
-            //this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.None;
-            //this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Border.Rounding = 16;
-            //this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            //this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            //this.kryptonPalette1.HeaderStyles.HeaderCommon.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, -1, -1, -1);
-            //this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            //this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            //this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.ButtonEdgeInset = 12;
+            btnPasswordCheckerForm = new Krypton.Toolkit.KryptonButton();
+            btnSqlInjectionForm = new Krypton.Toolkit.KryptonButton();
+            btnCipherAlgorithmsForm = new Krypton.Toolkit.KryptonButton();
+            SuspendLayout();
             // 
             // btnPasswordCheckerForm
             // 
-            this.btnPasswordCheckerForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPasswordCheckerForm.Location = new System.Drawing.Point(211, 271);
-            this.btnPasswordCheckerForm.Name = "btnPasswordCheckerForm";
-            this.btnPasswordCheckerForm.Size = new System.Drawing.Size(484, 44);
-            this.btnPasswordCheckerForm.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
-            this.btnPasswordCheckerForm.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
-            this.btnPasswordCheckerForm.StateCommon.Border.Color1 = System.Drawing.Color.Black;
-            this.btnPasswordCheckerForm.StateCommon.Border.Color2 = System.Drawing.Color.Black;
-            this.btnPasswordCheckerForm.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
-            this.btnPasswordCheckerForm.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnPasswordCheckerForm.StateCommon.Border.Rounding = 25;
-            this.btnPasswordCheckerForm.StateCommon.Border.Width = 1;
-            this.btnPasswordCheckerForm.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
-            this.btnPasswordCheckerForm.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
-            this.btnPasswordCheckerForm.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPasswordCheckerForm.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnPasswordCheckerForm.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.btnPasswordCheckerForm.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPasswordCheckerForm.TabIndex = 5;
-            this.btnPasswordCheckerForm.Values.Text = "Password Checker";
-            this.btnPasswordCheckerForm.Click += new System.EventHandler(this.btnPasswordCheckerForm_Click);
+            btnPasswordCheckerForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnPasswordCheckerForm.Location = new Point(202, 258);
+            btnPasswordCheckerForm.Margin = new System.Windows.Forms.Padding(2);
+            btnPasswordCheckerForm.Name = "btnPasswordCheckerForm";
+            btnPasswordCheckerForm.Size = new Size(439, 49);
+            btnPasswordCheckerForm.StateCommon.Back.Color1 = Color.SpringGreen;
+            btnPasswordCheckerForm.StateCommon.Back.Color2 = Color.MediumSpringGreen;
+            btnPasswordCheckerForm.StateCommon.Border.Color1 = Color.Black;
+            btnPasswordCheckerForm.StateCommon.Border.Color2 = Color.Black;
+            btnPasswordCheckerForm.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
+            btnPasswordCheckerForm.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            btnPasswordCheckerForm.StateCommon.Border.Rounding = 25F;
+            btnPasswordCheckerForm.StateCommon.Border.Width = 1;
+            btnPasswordCheckerForm.StateCommon.Content.LongText.Color1 = Color.White;
+            btnPasswordCheckerForm.StateCommon.Content.LongText.Color2 = Color.White;
+            btnPasswordCheckerForm.StateCommon.Content.LongText.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPasswordCheckerForm.StateCommon.Content.ShortText.Color1 = Color.Black;
+            btnPasswordCheckerForm.StateCommon.Content.ShortText.Color2 = Color.Black;
+            btnPasswordCheckerForm.StateCommon.Content.ShortText.Font = new Font("Arial Narrow", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPasswordCheckerForm.TabIndex = 5;
+            btnPasswordCheckerForm.Values.DropDownArrowColor = Color.Empty;
+            btnPasswordCheckerForm.Values.Text = "Password Checker";
+            btnPasswordCheckerForm.Click += btnPasswordCheckerForm_Click;
             // 
             // btnSqlInjectionForm
             // 
-            this.btnSqlInjectionForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSqlInjectionForm.Location = new System.Drawing.Point(211, 341);
-            this.btnSqlInjectionForm.Name = "btnSqlInjectionForm";
-            this.btnSqlInjectionForm.Size = new System.Drawing.Size(484, 44);
-            this.btnSqlInjectionForm.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
-            this.btnSqlInjectionForm.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
-            this.btnSqlInjectionForm.StateCommon.Border.Color1 = System.Drawing.Color.Black;
-            this.btnSqlInjectionForm.StateCommon.Border.Color2 = System.Drawing.Color.Black;
-            this.btnSqlInjectionForm.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
-            this.btnSqlInjectionForm.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnSqlInjectionForm.StateCommon.Border.Rounding = 25;
-            this.btnSqlInjectionForm.StateCommon.Border.Width = 1;
-            this.btnSqlInjectionForm.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
-            this.btnSqlInjectionForm.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
-            this.btnSqlInjectionForm.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSqlInjectionForm.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnSqlInjectionForm.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.btnSqlInjectionForm.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSqlInjectionForm.TabIndex = 6;
-            this.btnSqlInjectionForm.Values.Text = "Sql Injection";
-            this.btnSqlInjectionForm.Click += new System.EventHandler(this.btnSqlInjectionForm_Click);
+            btnSqlInjectionForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnSqlInjectionForm.Location = new Point(202, 339);
+            btnSqlInjectionForm.Margin = new System.Windows.Forms.Padding(2);
+            btnSqlInjectionForm.Name = "btnSqlInjectionForm";
+            btnSqlInjectionForm.Size = new Size(439, 56);
+            btnSqlInjectionForm.StateCommon.Back.Color1 = Color.SpringGreen;
+            btnSqlInjectionForm.StateCommon.Back.Color2 = Color.MediumSpringGreen;
+            btnSqlInjectionForm.StateCommon.Border.Color1 = Color.Black;
+            btnSqlInjectionForm.StateCommon.Border.Color2 = Color.Black;
+            btnSqlInjectionForm.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
+            btnSqlInjectionForm.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            btnSqlInjectionForm.StateCommon.Border.Rounding = 25F;
+            btnSqlInjectionForm.StateCommon.Border.Width = 1;
+            btnSqlInjectionForm.StateCommon.Content.LongText.Color1 = Color.White;
+            btnSqlInjectionForm.StateCommon.Content.LongText.Color2 = Color.White;
+            btnSqlInjectionForm.StateCommon.Content.LongText.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSqlInjectionForm.StateCommon.Content.ShortText.Color1 = Color.Black;
+            btnSqlInjectionForm.StateCommon.Content.ShortText.Color2 = Color.Black;
+            btnSqlInjectionForm.StateCommon.Content.ShortText.Font = new Font("Arial Narrow", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSqlInjectionForm.TabIndex = 6;
+            btnSqlInjectionForm.Values.DropDownArrowColor = Color.Empty;
+            btnSqlInjectionForm.Values.Text = "Sql Injection";
+            btnSqlInjectionForm.Click += btnSqlInjectionForm_Click;
             // 
             // btnCipherAlgorithmsForm
             // 
-            this.btnCipherAlgorithmsForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCipherAlgorithmsForm.Location = new System.Drawing.Point(211, 200);
-            this.btnCipherAlgorithmsForm.Name = "btnCipherAlgorithmsForm";
-            this.btnCipherAlgorithmsForm.Size = new System.Drawing.Size(484, 44);
-            this.btnCipherAlgorithmsForm.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
-            this.btnCipherAlgorithmsForm.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
-            this.btnCipherAlgorithmsForm.StateCommon.Border.Color1 = System.Drawing.Color.Black;
-            this.btnCipherAlgorithmsForm.StateCommon.Border.Color2 = System.Drawing.Color.Black;
-            this.btnCipherAlgorithmsForm.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
-            this.btnCipherAlgorithmsForm.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnCipherAlgorithmsForm.StateCommon.Border.Rounding = 25;
-            this.btnCipherAlgorithmsForm.StateCommon.Border.Width = 1;
-            this.btnCipherAlgorithmsForm.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
-            this.btnCipherAlgorithmsForm.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
-            this.btnCipherAlgorithmsForm.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCipherAlgorithmsForm.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnCipherAlgorithmsForm.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.btnCipherAlgorithmsForm.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCipherAlgorithmsForm.TabIndex = 7;
-            this.btnCipherAlgorithmsForm.Values.Text = "Cipher Algorithms";
-            this.btnCipherAlgorithmsForm.Click += new System.EventHandler(this.btnCipherAlgorithmsForm_Click);
+            btnCipherAlgorithmsForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnCipherAlgorithmsForm.Location = new Point(202, 174);
+            btnCipherAlgorithmsForm.Margin = new System.Windows.Forms.Padding(2);
+            btnCipherAlgorithmsForm.Name = "btnCipherAlgorithmsForm";
+            btnCipherAlgorithmsForm.Size = new Size(439, 51);
+            btnCipherAlgorithmsForm.StateCommon.Back.Color1 = Color.SpringGreen;
+            btnCipherAlgorithmsForm.StateCommon.Back.Color2 = Color.MediumSpringGreen;
+            btnCipherAlgorithmsForm.StateCommon.Border.Color1 = Color.Black;
+            btnCipherAlgorithmsForm.StateCommon.Border.Color2 = Color.Black;
+            btnCipherAlgorithmsForm.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
+            btnCipherAlgorithmsForm.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            btnCipherAlgorithmsForm.StateCommon.Border.Rounding = 25F;
+            btnCipherAlgorithmsForm.StateCommon.Border.Width = 1;
+            btnCipherAlgorithmsForm.StateCommon.Content.LongText.Color1 = Color.White;
+            btnCipherAlgorithmsForm.StateCommon.Content.LongText.Color2 = Color.White;
+            btnCipherAlgorithmsForm.StateCommon.Content.LongText.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCipherAlgorithmsForm.StateCommon.Content.ShortText.Color1 = Color.Black;
+            btnCipherAlgorithmsForm.StateCommon.Content.ShortText.Color2 = Color.Black;
+            btnCipherAlgorithmsForm.StateCommon.Content.ShortText.Font = new Font("Arial Narrow", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCipherAlgorithmsForm.StatePressed.Back.Color1 = Color.SpringGreen;
+            btnCipherAlgorithmsForm.StatePressed.Back.Color2 = Color.MediumSpringGreen;
+            btnCipherAlgorithmsForm.StatePressed.Border.Color1 = Color.Black;
+            btnCipherAlgorithmsForm.StatePressed.Border.Color2 = Color.Black;
+            btnCipherAlgorithmsForm.StatePressed.Content.ShortText.Color1 = Color.Black;
+            btnCipherAlgorithmsForm.StatePressed.Content.ShortText.Color2 = Color.Black;
+            btnCipherAlgorithmsForm.TabIndex = 7;
+            btnCipherAlgorithmsForm.Values.DropDownArrowColor = Color.Empty;
+            btnCipherAlgorithmsForm.Values.Text = "Cipher Algorithms";
+            btnCipherAlgorithmsForm.Click += btnCipherAlgorithmsForm_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(922, 595);
-            this.Controls.Add(this.btnCipherAlgorithmsForm);
-            this.Controls.Add(this.btnSqlInjectionForm);
-            this.Controls.Add(this.btnPasswordCheckerForm);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "MainForm";
-            //this.Palette = this.kryptonPalette1;
-            this.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main Form";
-            this.ResumeLayout(false);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            ClientSize = new Size(872, 598);
+            Controls.Add(btnCipherAlgorithmsForm);
+            Controls.Add(btnSqlInjectionForm);
+            Controls.Add(btnPasswordCheckerForm);
+            Name = "MainForm";
+            ShowIcon = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StateActive.Back.Color1 = SystemColors.ButtonFace;
+            StateActive.Back.Color2 = SystemColors.ButtonFace;
+            StateActive.Border.Color1 = SystemColors.ButtonFace;
+            StateActive.Border.Color2 = SystemColors.ButtonFace;
+            StateActive.Header.Back.Color1 = SystemColors.ButtonFace;
+            StateActive.Header.Back.Color2 = SystemColors.ButtonFace;
+            Text = "Main Form";
+            ResumeLayout(false);
 
         }
 
         #endregion
 
         private GradientPanel gradientPanel1;
-        //private Krypton.Toolkit.KryptonPalette kryptonPalette1;
-        private System.Windows.Forms.Timer typeTimer;
         //private Krypton.Toolkit.KryptonButton btnCipherAlgorithmsForm;
         private Krypton.Toolkit.KryptonButton btnPasswordCheckerForm;
         private Krypton.Toolkit.KryptonButton btnSqlInjectionForm;

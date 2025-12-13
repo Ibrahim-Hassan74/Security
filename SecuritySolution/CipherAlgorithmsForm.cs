@@ -20,6 +20,8 @@ namespace Security
         {
             _factory = factory;
             InitializeComponent();
+            InternalPanel.StateCommon.Color1 = Color.FromArgb(240, 240, 240);
+            InternalPanel.StateCommon.Color2 = Color.FromArgb(240, 240, 240);
             PopulateAlgorithms();
         }
 

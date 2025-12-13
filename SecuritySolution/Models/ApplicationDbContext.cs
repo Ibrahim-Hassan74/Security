@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Security.Models;
@@ -12,7 +13,14 @@ public partial class ApplicationDbContext : DbContext
         : base(options)
     {
     }
-
+    public ApplicationDbContext()
+    {
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var conn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        optionsBuilder.UseSqlServer(conn);
+    }
     public virtual DbSet<Password> Passwords { get; set; }
 
     public virtual DbSet<PwnedPassword> PwnedPasswords { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Security.Controls;
+using System.Drawing;
 
 namespace Security
 {
@@ -30,98 +31,165 @@ namespace Security
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            typeTimer = new System.Windows.Forms.Timer(components);
-            txtKey = new Krypton.Toolkit.KryptonTextBox();
-            lblKey = new System.Windows.Forms.Label();
-            btnGenerateKey = new Krypton.Toolkit.KryptonButton();
-            lblStatus = new Krypton.Toolkit.KryptonLabel();
+            txtPassword = new Krypton.Toolkit.KryptonTextBox();
+            lblStrength = new System.Windows.Forms.Label();
+            btnCheck = new Krypton.Toolkit.KryptonButton();
+            btnClear = new Krypton.Toolkit.KryptonButton();
+            lblHasUpper = new System.Windows.Forms.Label();
+            lblHasLower = new System.Windows.Forms.Label();
+            lblHasNumber = new System.Windows.Forms.Label();
+            lblHasSymbol = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
-            // txtKey
+            // txtPassword
             // 
-            txtKey.Location = new System.Drawing.Point(172, 11);
-            txtKey.Margin = new System.Windows.Forms.Padding(2);
-            txtKey.Multiline = true;
-            txtKey.Name = "txtKey";
-            txtKey.Size = new System.Drawing.Size(472, 121);
-            txtKey.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            txtKey.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(224, 224, 224);
-            txtKey.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(224, 224, 224);
-            txtKey.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            txtKey.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            txtKey.StateCommon.Border.Rounding = 15F;
-            txtKey.StateCommon.Content.Color1 = System.Drawing.Color.Gray;
-            txtKey.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            txtKey.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            txtKey.TabIndex = 1;
-            txtKey.Tag = "Enter key here";
-            txtKey.Text = "Enter key here";
-            txtKey.UseSystemPasswordChar = true;
-            txtKey.TextChanged += txtKey_TextChanged;
-            txtKey.Enter += TextBox_Enter;
-            txtKey.Leave += TextBox_Leave;
+            txtPassword.Location = new Point(77, 20);
+            txtPassword.Margin = new System.Windows.Forms.Padding(2);
+            txtPassword.Multiline = true;
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(571, 136);
+            txtPassword.StateCommon.Back.Color1 = Color.White;
+            txtPassword.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
+            txtPassword.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
+            txtPassword.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            txtPassword.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            txtPassword.StateCommon.Border.Rounding = 15F;
+            txtPassword.StateCommon.Content.Color1 = Color.Gray;
+            txtPassword.StateCommon.Content.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassword.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            txtPassword.TabIndex = 1;
+            txtPassword.Tag = "Enter Password here";
+            txtPassword.Text = "Enter Password here";
+            txtPassword.UseSystemPasswordChar = true;
+            txtPassword.TextChanged += txtPassword_TextChanged;
+            txtPassword.Enter += TextBox_Enter;
+            txtPassword.Leave += TextBox_Leave;
             // 
-            // lblKey
+            // lblStrength
             // 
-            lblKey.AutoSize = true;
-            lblKey.Location = new System.Drawing.Point(12, 38);
-            lblKey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            lblKey.Name = "lblKey";
-            lblKey.Size = new System.Drawing.Size(36, 20);
-            lblKey.TabIndex = 2;
-            lblKey.Text = "Key:";
+            lblStrength.AutoSize = true;
+            lblStrength.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStrength.Location = new Point(77, 270);
+            lblStrength.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblStrength.Name = "lblStrength";
+            lblStrength.Size = new Size(0, 38);
+            lblStrength.TabIndex = 2;
             // 
-            // btnGenerateKey
+            // btnCheck
             // 
-            btnGenerateKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnGenerateKey.Location = new System.Drawing.Point(732, 60);
-            btnGenerateKey.Margin = new System.Windows.Forms.Padding(2);
-            btnGenerateKey.Name = "btnGenerateKey";
-            btnGenerateKey.Size = new System.Drawing.Size(266, 51);
-            btnGenerateKey.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
-            btnGenerateKey.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
-            btnGenerateKey.StateCommon.Border.Color1 = System.Drawing.Color.Black;
-            btnGenerateKey.StateCommon.Border.Color2 = System.Drawing.Color.Black;
-            btnGenerateKey.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
-            btnGenerateKey.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            btnGenerateKey.StateCommon.Border.Rounding = 25F;
-            btnGenerateKey.StateCommon.Border.Width = 1;
-            btnGenerateKey.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
-            btnGenerateKey.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
-            btnGenerateKey.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            btnGenerateKey.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            btnGenerateKey.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            btnGenerateKey.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            btnGenerateKey.TabIndex = 4;
-            btnGenerateKey.Values.DropDownArrowColor = System.Drawing.Color.Empty;
-            btnGenerateKey.Values.Text = "Generate Key";
-            btnGenerateKey.Click += btnGenerateKey_Click;
+            btnCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnCheck.Location = new Point(77, 179);
+            btnCheck.Margin = new System.Windows.Forms.Padding(2);
+            btnCheck.Name = "btnCheck";
+            btnCheck.Size = new Size(300, 51);
+            btnCheck.StateCommon.Back.Color1 = Color.SpringGreen;
+            btnCheck.StateCommon.Back.Color2 = Color.MediumSpringGreen;
+            btnCheck.StateCommon.Border.Color1 = Color.Black;
+            btnCheck.StateCommon.Border.Color2 = Color.Black;
+            btnCheck.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
+            btnCheck.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            btnCheck.StateCommon.Border.Rounding = 25F;
+            btnCheck.StateCommon.Border.Width = 1;
+            btnCheck.StateCommon.Content.LongText.Color1 = Color.White;
+            btnCheck.StateCommon.Content.LongText.Color2 = Color.White;
+            btnCheck.StateCommon.Content.LongText.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCheck.StateCommon.Content.ShortText.Color1 = Color.Black;
+            btnCheck.StateCommon.Content.ShortText.Color2 = Color.Black;
+            btnCheck.StateCommon.Content.ShortText.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCheck.TabIndex = 4;
+            btnCheck.Values.DropDownArrowColor = Color.Empty;
+            btnCheck.Values.Text = "Check Strength";
+            btnCheck.Click += btnCheck_Click;
             // 
-            // lblStatus
+            // btnClear
             // 
-            lblStatus.Location = new System.Drawing.Point(732, 141);
-            lblStatus.Margin = new System.Windows.Forms.Padding(2);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new System.Drawing.Size(75, 28);
-            lblStatus.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(128, 255, 128);
-            lblStatus.StateCommon.ShortText.Color2 = System.Drawing.Color.FromArgb(128, 255, 128);
-            lblStatus.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            lblStatus.TabIndex = 5;
-            lblStatus.Values.Text = "Ready";
+            btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnClear.Location = new Point(392, 179);
+            btnClear.Margin = new System.Windows.Forms.Padding(2);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(256, 51);
+            btnClear.StateCommon.Back.Color1 = Color.Gainsboro;
+            btnClear.StateCommon.Back.Color2 = Color.Gainsboro;
+            btnClear.StateCommon.Border.Color1 = Color.Black;
+            btnClear.StateCommon.Border.Color2 = Color.Black;
+            btnClear.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
+            btnClear.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            btnClear.StateCommon.Border.Rounding = 25F;
+            btnClear.StateCommon.Border.Width = 1;
+            btnClear.StateCommon.Content.LongText.Color1 = Color.White;
+            btnClear.StateCommon.Content.LongText.Color2 = Color.White;
+            btnClear.StateCommon.Content.LongText.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.StateCommon.Content.ShortText.Color1 = Color.Black;
+            btnClear.StateCommon.Content.ShortText.Color2 = Color.Black;
+            btnClear.StateCommon.Content.ShortText.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.TabIndex = 7;
+            btnClear.Values.DropDownArrowColor = Color.Empty;
+            btnClear.Values.Text = "Clear";
+            btnClear.Click += btnClear_Click;
+            // 
+            // lblHasUpper
+            // 
+            lblHasUpper.AutoSize = true;
+            lblHasUpper.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Bold);
+            lblHasUpper.Location = new Point(77, 410);
+            lblHasUpper.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblHasUpper.Name = "lblHasUpper";
+            lblHasUpper.Size = new Size(0, 31);
+            lblHasUpper.TabIndex = 8;
+            // 
+            // lblHasLower
+            // 
+            lblHasLower.AutoSize = true;
+            lblHasLower.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Bold);
+            lblHasLower.Location = new Point(77, 340);
+            lblHasLower.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblHasLower.Name = "lblHasLower";
+            lblHasLower.Size = new Size(0, 31);
+            lblHasLower.TabIndex = 9;
+            // 
+            // lblHasNumber
+            // 
+            lblHasNumber.AutoSize = true;
+            lblHasNumber.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Bold);
+            lblHasNumber.Location = new Point(77, 480);
+            lblHasNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblHasNumber.Name = "lblHasNumber";
+            lblHasNumber.Size = new Size(0, 31);
+            lblHasNumber.TabIndex = 10;
+            // 
+            // lblHasSymbol
+            // 
+            lblHasSymbol.AutoSize = true;
+            lblHasSymbol.Font = new Font("Segoe UI", 13.2000008F, FontStyle.Bold);
+            lblHasSymbol.Location = new Point(77, 550);
+            lblHasSymbol.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblHasSymbol.Name = "lblHasSymbol";
+            lblHasSymbol.Size = new Size(0, 31);
+            lblHasSymbol.TabIndex = 11;
             // 
             // PasswordCheckerForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1132, 744);
-            Controls.Add(lblStatus);
-            Controls.Add(btnGenerateKey);
-            Controls.Add(lblKey);
-            Controls.Add(txtKey);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            ClientSize = new Size(717, 667);
+            Controls.Add(lblHasSymbol);
+            Controls.Add(lblHasNumber);
+            Controls.Add(lblHasLower);
+            Controls.Add(lblHasUpper);
+            Controls.Add(btnClear);
+            Controls.Add(btnCheck);
+            Controls.Add(lblStrength);
+            Controls.Add(txtPassword);
             Name = "PasswordCheckerForm";
             ShowIcon = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StateCommon.Back.Color1 = SystemColors.ButtonFace;
+            StateCommon.Back.Color2 = SystemColors.ButtonFace;
+            StateCommon.Border.Color1 = SystemColors.ButtonFace;
+            StateCommon.Border.Color2 = SystemColors.ButtonFace;
+            StateCommon.Header.Back.Color1 = SystemColors.ButtonFace;
+            StateCommon.Header.Back.Color2 = SystemColors.ButtonFace;
+            StateCommon.Header.Border.Color1 = SystemColors.ButtonFace;
+            StateCommon.Header.Border.Color2 = SystemColors.ButtonFace;
             Text = "Password Checker";
             ResumeLayout(false);
             PerformLayout();
@@ -131,12 +199,14 @@ namespace Security
         #endregion
 
         private GradientPanel gradientPanel1;
-        // private Krypton.Toolkit.KryptonPalette kryptonPalette1;
-        private System.Windows.Forms.Timer typeTimer;
-        private Krypton.Toolkit.KryptonTextBox txtKey;
-        private System.Windows.Forms.Label lblKey;
-        private Krypton.Toolkit.KryptonButton btnGenerateKey;
-        private Krypton.Toolkit.KryptonLabel lblStatus;
+        private Krypton.Toolkit.KryptonTextBox txtPassword;
+        private System.Windows.Forms.Label lblStrength;
+        private Krypton.Toolkit.KryptonButton btnCheck;
+        private Krypton.Toolkit.KryptonButton btnClear;
+        private System.Windows.Forms.Label lblHasUpper;
+        private System.Windows.Forms.Label lblHasLower;
+        private System.Windows.Forms.Label lblHasNumber;
+        private System.Windows.Forms.Label lblHasSymbol;
     }
 }
 
