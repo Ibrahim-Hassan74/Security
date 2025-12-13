@@ -73,76 +73,136 @@ namespace Security
                 return;
             }
 
-            if (!chkInject.Checked)
+            if (chkInject.Checked)
             {
-                InsertPasswordAndRefresh(input, "Inserted new password (plain text mode).");
-                return;
+                InsertPassword_Vulnerable(input);
             }
+            else
+            {
+                InsertPassword_Secure(input);
+            }
+            RefreshPasswordsGrid();
 
-            var conn = _db.Database.GetDbConnection();
 
+            //var conn = _db.Database.GetDbConnection();
+
+            //try
+            //{
+            //    //if (!(conn is SqlConnection sqlConn))
+            //    //{
+            //    //    MessageBox.Show("Database connection is not a SqlConnection. This executor expects SQL Server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    //    return;
+            //    //}
+
+            //    //using (var cmd = sqlConn.CreateCommand())
+            //    //{
+            //    //    cmd.CommandText = input;
+            //    //    cmd.CommandType = CommandType.Text;
+            //    //    if (sqlConn.State != ConnectionState.Open) sqlConn.Open();
+
+            //    //    using (var reader = cmd.ExecuteReader(CommandBehavior.Default))
+            //    //    {
+            //    //        var resultTables = new List<DataTable>();
+            //    //        int resultSetIndex = 0;
+            //    //        do
+            //    //        {
+            //    //            var table = new DataTable();
+            //    //            if (reader.HasRows)
+            //    //            {
+            //    //                table.Load(reader);
+            //    //                resultTables.Add(table);
+            //    //            }
+            //    //            else
+            //    //            {
+            //    //                resultTables.Add(table);
+            //    //            }
+
+            //    //            resultSetIndex++;
+            //    //        } while (!reader.IsClosed && reader.NextResult());
+
+            //    //        int recordsAffected = reader.RecordsAffected;
+
+            //    //        DataTable firstNonEmpty = resultTables.FirstOrDefault(t => t.Rows.Count > 0);
+
+            //    //        if (firstNonEmpty != null)
+            //    //        {
+            //    //            dgvPasswords.DataSource = firstNonEmpty;
+            //    //            MessageBox.Show($"Executed. Result sets: {resultTables.Count}. First non-empty result set rows: {firstNonEmpty.Rows.Count}.", "Executed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    //        }
+            //    //        else
+            //    //        {
+            //    //            dgvPasswords.DataSource = null;
+            //    //            MessageBox.Show($"Executed. Result sets: {resultTables.Count}. Rows affected (if applicable): {recordsAffected}", "Executed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    //        }
+            //    //    }
+            //    //}
+            //}
+            //catch (SqlException sqlEx)
+            //{
+            //    MessageBox.Show("SQL error:\n" + sqlEx.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Execution error:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //finally
+            //{
+            //    RefreshPasswordsGrid();
+            //}
+        }
+
+        private void InsertPassword_Secure(string passwordValue)
+        {
             try
             {
-                if (!(conn is SqlConnection sqlConn))
-                {
-                    MessageBox.Show("Database connection is not a SqlConnection. This executor expects SQL Server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                var pw = new Password { Password1 = passwordValue };
+                _db.Passwords.Add(pw);
+                _db.SaveChanges();
 
-                using (var cmd = sqlConn.CreateCommand())
-                {
-                    cmd.CommandText = input;
-                    cmd.CommandType = CommandType.Text;
-                    if (sqlConn.State != ConnectionState.Open) sqlConn.Open();
-
-                    using (var reader = cmd.ExecuteReader(CommandBehavior.Default))
-                    {
-                        var resultTables = new List<DataTable>();
-                        int resultSetIndex = 0;
-                        do
-                        {
-                            var table = new DataTable();
-                            if (reader.HasRows)
-                            {
-                                table.Load(reader);
-                                resultTables.Add(table);
-                            }
-                            else
-                            {
-                                resultTables.Add(table);
-                            }
-
-                            resultSetIndex++;
-                        } while (!reader.IsClosed && reader.NextResult());
-
-                        int recordsAffected = reader.RecordsAffected;
-
-                        DataTable firstNonEmpty = resultTables.FirstOrDefault(t => t.Rows.Count > 0);
-
-                        if (firstNonEmpty != null)
-                        {
-                            dgvPasswords.DataSource = firstNonEmpty;
-                            MessageBox.Show($"Executed. Result sets: {resultTables.Count}. First non-empty result set rows: {firstNonEmpty.Rows.Count}.", "Executed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            dgvPasswords.DataSource = null;
-                            MessageBox.Show($"Executed. Result sets: {resultTables.Count}. Rows affected (if applicable): {recordsAffected}", "Executed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-            }
-            catch (SqlException sqlEx)
-            {
-                MessageBox.Show("SQL error:\n" + sqlEx.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Inserted safely (parameterized / EF Core).",
+                    "SECURE",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Execution error:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Secure insert error:\n" + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
+        }
+
+        private void InsertPassword_Vulnerable(string passwordValue)
+        {
+            var conn = _db.Database.GetDbConnection();
+
+            string sql =
+                $"INSERT INTO Passwords (Password) VALUES ('{passwordValue}')";
+
+            try
             {
-                RefreshPasswordsGrid();
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = sql;
+                cmd.CommandType = CommandType.Text;
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show(
+                    "Inserted using VULNERABLE SQL (string concatenation).",
+                    "VULNERABLE",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(
+                    "SQL Injection triggered!\n\n" + ex.Message,
+                    "SQL ERROR (VULNERABLE)",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
