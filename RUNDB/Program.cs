@@ -8,7 +8,7 @@ namespace RUNDB
     {
         // USER CONFIG (from your message)
         const string ConnectionString = "Data Source=.;Initial Catalog=Security;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-        const string RockYouPath = @"E:\aspnetcore\code\rockyou\rockyou.txt";
+        static string RockYouPath = Path.Combine(AppContext.BaseDirectory, "../../../rockyou.txt");
 
         // Tunables
         // Adjust memory used per chunk. DEFAULT: ~400 MB.

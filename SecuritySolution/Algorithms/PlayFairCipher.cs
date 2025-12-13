@@ -61,7 +61,7 @@ namespace Security.Algorithms
 
             try
             {
-                EnableDictionary = File.ReadAllLines("E:\\aspnetcore\\code\\Security\\SecuritySolution\\Algorithms\\enable.txt").ToList();
+                EnableDictionary = File.ReadAllLines(Path.Combine(AppContext.BaseDirectory, "../../../Algorithms/enable.txt")).ToList();
                 EnableDictionary.Sort((a, b) => a.Length.CompareTo(b.Length));
                 EnableDictionary = EnableDictionary.Select(s => s.ToUpper()).ToList();
             }
