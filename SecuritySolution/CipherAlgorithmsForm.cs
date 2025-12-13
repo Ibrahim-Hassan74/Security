@@ -304,33 +304,6 @@ namespace Security
             }
         }
 
-        private void btnPasswordCheckerForm_Click(object sender, EventArgs e)
-        {
-            var form = new PasswordCheckerForm();
-
-            form.FormClosed += (s, args) =>
-            {
-                this.Show();
-            };
-
-            this.Hide();
-            form.Show();
-        }
-
-
-        private void btnSqlInjectionForm_Click(object sender, EventArgs e)
-        {
-            var form = new SqlInjectionForm();
-            form.FormClosed += (s, args) => this.Show();
-            this.Hide();
-            form.Show();
-        }
-
-        private void CipherAlgorithmsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void CipherAlgorithmsForm_Load_1(object sender, EventArgs e)
         {
 

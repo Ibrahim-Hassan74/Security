@@ -1,7 +1,10 @@
-﻿using Security.Service;
+﻿using Microsoft.EntityFrameworkCore;
+using Security.Models;
+using Security.Service;
 using Security.ServiceContract;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace Security
@@ -14,13 +17,19 @@ namespace Security
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            var conn = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseSqlServer(conn);
+            using (var context = new ApplicationDbContext(optionsBuilder.Options))
+            {
+                context.Database.EnsureCreated();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            var mainForm = new MainForm();
-            //var passwordChecker = new PasswordCheckerForm();
-            //var sqlInjector = new SqlInjectionForm();
-            Application.Run(mainForm);
+                var mainForm = new MainForm(context);
+                Application.Run(mainForm);
+            }
+
         }
     }
 }

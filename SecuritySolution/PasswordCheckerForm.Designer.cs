@@ -40,11 +40,11 @@ namespace Security
             // 
             // txtKey
             // 
-            txtKey.Location = new System.Drawing.Point(149, 130);
-            txtKey.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            txtKey.Location = new System.Drawing.Point(172, 11);
+            txtKey.Margin = new System.Windows.Forms.Padding(2);
             txtKey.Multiline = true;
             txtKey.Name = "txtKey";
-            txtKey.Size = new System.Drawing.Size(330, 121);
+            txtKey.Size = new System.Drawing.Size(472, 121);
             txtKey.StateCommon.Back.Color1 = System.Drawing.Color.White;
             txtKey.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(224, 224, 224);
             txtKey.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(224, 224, 224);
@@ -65,7 +65,7 @@ namespace Security
             // lblKey
             // 
             lblKey.AutoSize = true;
-            lblKey.Location = new System.Drawing.Point(10, 140);
+            lblKey.Location = new System.Drawing.Point(12, 38);
             lblKey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             lblKey.Name = "lblKey";
             lblKey.Size = new System.Drawing.Size(36, 20);
@@ -75,10 +75,10 @@ namespace Security
             // btnGenerateKey
             // 
             btnGenerateKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            btnGenerateKey.Location = new System.Drawing.Point(536, 177);
-            btnGenerateKey.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            btnGenerateKey.Location = new System.Drawing.Point(732, 60);
+            btnGenerateKey.Margin = new System.Windows.Forms.Padding(2);
             btnGenerateKey.Name = "btnGenerateKey";
-            btnGenerateKey.Size = new System.Drawing.Size(81, 30);
+            btnGenerateKey.Size = new System.Drawing.Size(266, 51);
             btnGenerateKey.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
             btnGenerateKey.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
             btnGenerateKey.StateCommon.Border.Color1 = System.Drawing.Color.Black;
@@ -100,8 +100,8 @@ namespace Security
             // 
             // lblStatus
             // 
-            lblStatus.Location = new System.Drawing.Point(207, 272);
-            lblStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            lblStatus.Location = new System.Drawing.Point(732, 141);
+            lblStatus.Margin = new System.Windows.Forms.Padding(2);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new System.Drawing.Size(75, 28);
             lblStatus.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(128, 255, 128);
@@ -114,7 +114,7 @@ namespace Security
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(672, 476);
+            ClientSize = new System.Drawing.Size(1132, 744);
             Controls.Add(lblStatus);
             Controls.Add(btnGenerateKey);
             Controls.Add(lblKey);

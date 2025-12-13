@@ -3,13 +3,16 @@ using Security.Service;
 using Security.ServiceContract;
 using System.Collections.Generic;
 using Krypton.Toolkit;
+using Security.Models;
 
 namespace Security
 {
     public partial class MainForm : KryptonForm
     {
-        public MainForm()
+        private readonly ApplicationDbContext _db;
+        public MainForm(ApplicationDbContext db)
         {
+            _db = db;
             InitializeComponent();
         }
         private static ICipherFactory BuildFactory()
@@ -39,7 +42,7 @@ namespace Security
 
         private void btnSqlInjectionForm_Click(object sender, EventArgs e)
         {
-            var form = new SqlInjectionForm();
+            var form = new SqlInjectionForm(_db);
             form.FormClosed += (s, args) => this.Show();
             this.Hide();
             form.Show();

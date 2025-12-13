@@ -30,143 +30,110 @@ namespace Security
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlInjectionForm));
-            // this.kryptonPalette1 = new Krypton.Toolkit.KryptonPalette(this.components);
-            this.typeTimer = new System.Windows.Forms.Timer(this.components);
-            this.txtKey = new Krypton.Toolkit.KryptonTextBox();
-            this.lblKey = new System.Windows.Forms.Label();
-            this.btnGenerateKey = new Krypton.Toolkit.KryptonButton();
-            this.lblStatus = new Krypton.Toolkit.KryptonLabel();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            typeTimer = new System.Windows.Forms.Timer(components);
+            txtQuery = new Krypton.Toolkit.KryptonTextBox();
+            lblText = new System.Windows.Forms.Label();
+            btnInject = new Krypton.Toolkit.KryptonButton();
+            chkInject = new Krypton.Toolkit.KryptonCheckBox();
+            dgvPasswords = new Krypton.Toolkit.KryptonDataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvPasswords).BeginInit();
+            SuspendLayout();
             // 
-            // kryptonPalette1
+            // txtQuery
             // 
-            // // this.kryptonPalette1.ButtonSpecs.FormClose.Image = ((System.Drawing.Image)(resources.GetObject("kryptonPalette1.ButtonSpecs.FormClose.Image")));
-            // // this.kryptonPalette1.ButtonSpecs.FormMax.Image = ((System.Drawing.Image)(resources.GetObject("kryptonPalette1.ButtonSpecs.FormMax.Image")));
-            // // this.kryptonPalette1.ButtonSpecs.FormMin.Image = ((System.Drawing.Image)(resources.GetObject("kryptonPalette1.ButtonSpecs.FormMin.Image")));
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.Color1 = System.Drawing.Color.White;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Back.Color2 = System.Drawing.Color.White;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateNormal.Border.Width = 0;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.Color1 = System.Drawing.Color.White;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Back.Color2 = System.Drawing.Color.White;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StatePressed.Border.Width = 0;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.Color1 = System.Drawing.Color.White;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Back.Color2 = System.Drawing.Color.White;
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            // this.kryptonPalette1.ButtonStyles.ButtonForm.StateTracking.Border.Width = 0;
-            // this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            // this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            // this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            // | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            // this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.None;
-            // this.kryptonPalette1.FormStyles.FormCommon.StateCommon.Border.Rounding = 16;
-            // this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            // this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            // this.kryptonPalette1.HeaderStyles.HeaderCommon.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, -1, -1, -1);
-            // this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            // this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            // this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.ButtonEdgeInset = 12;
+            txtQuery.Location = new System.Drawing.Point(180, 34);
+            txtQuery.Margin = new System.Windows.Forms.Padding(2);
+            txtQuery.Multiline = true;
+            txtQuery.Name = "txtQuery";
+            txtQuery.Size = new System.Drawing.Size(287, 84);
+            txtQuery.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            txtQuery.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(224, 224, 224);
+            txtQuery.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(224, 224, 224);
+            txtQuery.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            txtQuery.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            txtQuery.StateCommon.Border.Rounding = 15F;
+            txtQuery.StateCommon.Content.Color1 = System.Drawing.Color.Gray;
+            txtQuery.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            txtQuery.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            txtQuery.TabIndex = 1;
+            txtQuery.Tag = "Enter key here";
+            txtQuery.Text = "Enter key here";
+            txtQuery.UseSystemPasswordChar = true;
+            txtQuery.Enter += TextBox_Enter;
+            txtQuery.Leave += TextBox_Leave;
             // 
-            // txtKey
+            // lblText
             // 
-            this.txtKey.Location = new System.Drawing.Point(260, 188);
-            this.txtKey.Multiline = true;
-            this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(408, 44);
-            this.txtKey.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.txtKey.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtKey.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtKey.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.txtKey.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            this.txtKey.StateCommon.Border.Rounding = 15;
-            this.txtKey.StateCommon.Content.Color1 = System.Drawing.Color.Gray;
-            this.txtKey.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKey.StateCommon.Content.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.txtKey.TabIndex = 1;
-            this.txtKey.Tag = "Enter key here";
-            this.txtKey.Text = "Enter key here";
-            this.txtKey.UseSystemPasswordChar = true;
-            this.txtKey.Enter += new System.EventHandler(this.TextBox_Enter);
-            this.txtKey.Leave += new System.EventHandler(this.TextBox_Leave);
+            lblText.AutoSize = true;
+            lblText.Location = new System.Drawing.Point(41, 34);
+            lblText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblText.Name = "lblText";
+            lblText.Size = new System.Drawing.Size(45, 20);
+            lblText.TabIndex = 2;
+            lblText.Text = "TEXT:";
             // 
-            // lblKey
+            // btnInject
             // 
-            this.lblKey.AutoSize = true;
-            this.lblKey.Location = new System.Drawing.Point(17, 203);
-            this.lblKey.Name = "lblKey";
-            this.lblKey.Size = new System.Drawing.Size(60, 29);
-            this.lblKey.TabIndex = 2;
-            this.lblKey.Text = "Key:";
+            btnInject.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnInject.Location = new System.Drawing.Point(516, 53);
+            btnInject.Margin = new System.Windows.Forms.Padding(2);
+            btnInject.Name = "btnInject";
+            btnInject.Size = new System.Drawing.Size(235, 47);
+            btnInject.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
+            btnInject.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
+            btnInject.StateCommon.Border.Color1 = System.Drawing.Color.Black;
+            btnInject.StateCommon.Border.Color2 = System.Drawing.Color.Black;
+            btnInject.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
+            btnInject.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            btnInject.StateCommon.Border.Rounding = 25F;
+            btnInject.StateCommon.Border.Width = 1;
+            btnInject.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
+            btnInject.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
+            btnInject.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnInject.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            btnInject.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            btnInject.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnInject.TabIndex = 4;
+            btnInject.Values.DropDownArrowColor = System.Drawing.Color.Empty;
+            btnInject.Values.Text = "Try Inject";
+            btnInject.Click += btnInject_Click;
             // 
-            // btnGenerateKey
+            // chkInject
             // 
-            this.btnGenerateKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGenerateKey.Location = new System.Drawing.Point(726, 188);
-            this.btnGenerateKey.Name = "btnGenerateKey";
-            this.btnGenerateKey.Size = new System.Drawing.Size(142, 44);
-            this.btnGenerateKey.StateCommon.Back.Color1 = System.Drawing.Color.SpringGreen;
-            this.btnGenerateKey.StateCommon.Back.Color2 = System.Drawing.Color.MediumSpringGreen;
-            this.btnGenerateKey.StateCommon.Border.Color1 = System.Drawing.Color.Black;
-            this.btnGenerateKey.StateCommon.Border.Color2 = System.Drawing.Color.Black;
-            this.btnGenerateKey.StateCommon.Border.Draw = Krypton.Toolkit.InheritBool.True;
-            this.btnGenerateKey.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnGenerateKey.StateCommon.Border.Rounding = 25;
-            this.btnGenerateKey.StateCommon.Border.Width = 1;
-            this.btnGenerateKey.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
-            this.btnGenerateKey.StateCommon.Content.LongText.Color2 = System.Drawing.Color.White;
-            this.btnGenerateKey.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerateKey.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnGenerateKey.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.btnGenerateKey.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerateKey.TabIndex = 4;
-            this.btnGenerateKey.Values.Text = "Generate Key";
-            this.btnGenerateKey.Click += new System.EventHandler(this.btnGenerateKey_Click);
+            chkInject.Location = new System.Drawing.Point(516, 115);
+            chkInject.Name = "chkInject";
+            chkInject.Size = new System.Drawing.Size(65, 24);
+            chkInject.TabIndex = 7;
+            chkInject.Values.Text = "Inject";
             // 
-            // lblStatus
+            // dgvPasswords
             // 
-            this.lblStatus.Location = new System.Drawing.Point(363, 395);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(75, 28);
-            this.lblStatus.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblStatus.StateCommon.ShortText.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblStatus.StateCommon.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.TabIndex = 5;
-            this.lblStatus.Values.Text = "Ready";
+            dgvPasswords.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dgvPasswords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPasswords.Location = new System.Drawing.Point(70, 190);
+            dgvPasswords.Name = "dgvPasswords";
+            dgvPasswords.RowHeadersWidth = 51;
+            dgvPasswords.Size = new System.Drawing.Size(681, 330);
+            dgvPasswords.TabIndex = 9;
             // 
             // SqlInjectionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1176, 690);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.btnGenerateKey);
-            this.Controls.Add(this.lblKey);
-            this.Controls.Add(this.txtKey);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "SqlInjectionForm";
-            // this.Palette = this.kryptonPalette1;
-            this.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sql Injection";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(867, 584);
+            Controls.Add(dgvPasswords);
+            Controls.Add(chkInject);
+            Controls.Add(btnInject);
+            Controls.Add(lblText);
+            Controls.Add(txtQuery);
+            Name = "SqlInjectionForm";
+            ShowIcon = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Sql Injection";
+            ((System.ComponentModel.ISupportInitialize)dgvPasswords).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -175,10 +142,11 @@ namespace Security
         private GradientPanel gradientPanel1;
         // private Krypton.Toolkit.KryptonPalette kryptonPalette1;
         private System.Windows.Forms.Timer typeTimer;
-        private Krypton.Toolkit.KryptonTextBox txtKey;
-        private System.Windows.Forms.Label lblKey;
-        private Krypton.Toolkit.KryptonButton btnGenerateKey;
-        private Krypton.Toolkit.KryptonLabel lblStatus;
+        private Krypton.Toolkit.KryptonTextBox txtQuery;
+        private System.Windows.Forms.Label lblText;
+        private Krypton.Toolkit.KryptonButton btnInject;
+        private Krypton.Toolkit.KryptonCheckBox chkInject;
+        private Krypton.Toolkit.KryptonDataGridView dgvPasswords;
     }
 }
 

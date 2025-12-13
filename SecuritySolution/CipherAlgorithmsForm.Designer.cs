@@ -1,4 +1,4 @@
-﻿﻿using Security.Controls;
+﻿using Security.Controls;
 using System.Drawing;
 
 namespace Security

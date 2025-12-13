@@ -1,22 +1,37 @@
-﻿using System;
+﻿using Krypton.Toolkit;
+using Microsoft.Data.SqlClient; // for ADO fallback
+using Microsoft.EntityFrameworkCore;
+using Security.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
-using Security.ServiceContract;
-using Krypton.Toolkit;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Security
 {
     public partial class SqlInjectionForm : KryptonForm
     {
-        public SqlInjectionForm()
+        private readonly ApplicationDbContext _db;
+
+        public SqlInjectionForm(ApplicationDbContext db)
         {
+            _db = db;
             InitializeComponent();
+
+            lblText.Text = "TEXT:";
+            btnInject.Text = "Try Inject";
+            chkInject.Text = "Inject";
+            txtQuery.Tag = "Enter key here";
+            SetPlaceholder(txtQuery, txtQuery.Tag?.ToString() ?? "");
+            RefreshPasswordsGrid();
         }
 
         private void TextBox_Enter(object sender, EventArgs e)
         {
             var txt = sender as KryptonTextBox;
             if (txt == null) return;
-
             string placeholder = txt.Tag?.ToString() ?? "";
             RemovePlaceholder(txt, placeholder);
         }
@@ -25,7 +40,6 @@ namespace Security
         {
             var txt = sender as KryptonTextBox;
             if (txt == null) return;
-
             string placeholder = txt.Tag?.ToString() ?? "";
             SetPlaceholder(txt, placeholder);
         }
@@ -48,11 +62,125 @@ namespace Security
             }
         }
 
-
-        private void btnGenerateKey_Click(object sender, EventArgs e)
+        private void btnInject_Click(object sender, EventArgs e)
         {
+            string placeholder = txtQuery.Tag?.ToString() ?? "";
+            string input = txtQuery.Text?.Trim() ?? "";
 
+            if (string.IsNullOrWhiteSpace(input) || input == placeholder)
+            {
+                MessageBox.Show("Please enter a query or password in the text box.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!chkInject.Checked)
+            {
+                InsertPasswordAndRefresh(input, "Inserted new password (plain text mode).");
+                return;
+            }
+
+            var conn = _db.Database.GetDbConnection();
+
+            try
+            {
+                if (!(conn is SqlConnection sqlConn))
+                {
+                    MessageBox.Show("Database connection is not a SqlConnection. This executor expects SQL Server.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                using (var cmd = sqlConn.CreateCommand())
+                {
+                    cmd.CommandText = input;
+                    cmd.CommandType = CommandType.Text;
+                    if (sqlConn.State != ConnectionState.Open) sqlConn.Open();
+
+                    using (var reader = cmd.ExecuteReader(CommandBehavior.Default))
+                    {
+                        var resultTables = new List<DataTable>();
+                        int resultSetIndex = 0;
+                        do
+                        {
+                            var table = new DataTable();
+                            if (reader.HasRows)
+                            {
+                                table.Load(reader);
+                                resultTables.Add(table);
+                            }
+                            else
+                            {
+                                resultTables.Add(table);
+                            }
+
+                            resultSetIndex++;
+                        } while (!reader.IsClosed && reader.NextResult());
+
+                        int recordsAffected = reader.RecordsAffected;
+
+                        DataTable firstNonEmpty = resultTables.FirstOrDefault(t => t.Rows.Count > 0);
+
+                        if (firstNonEmpty != null)
+                        {
+                            dgvPasswords.DataSource = firstNonEmpty;
+                            MessageBox.Show($"Executed. Result sets: {resultTables.Count}. First non-empty result set rows: {firstNonEmpty.Rows.Count}.", "Executed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            dgvPasswords.DataSource = null;
+                            MessageBox.Show($"Executed. Result sets: {resultTables.Count}. Rows affected (if applicable): {recordsAffected}", "Executed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("SQL error:\n" + sqlEx.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Execution error:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                RefreshPasswordsGrid();
+            }
         }
+
+        private void InsertPasswordAndRefresh(string passwordValue, string successMessage)
+        {
+            try
+            {
+                var pw = new Password { Password1 = passwordValue };
+                _db.Passwords.Add(pw);
+                _db.SaveChanges();
+
+                MessageBox.Show(successMessage, "Inserted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RefreshPasswordsGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error inserting password:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RefreshPasswordsGrid()
+        {
+            try
+            {
+                var list = _db.Passwords
+                    .AsNoTracking()
+                    .OrderByDescending(p => p.Id)
+                    .Take(200)
+                    .Select(p => new { p.Id, p.Password1 })
+                    .ToList();
+
+                dgvPasswords.DataSource = list;
+            }
+            catch (Exception)
+            {
+                dgvPasswords.DataSource = null;
+            }
+        }
+
     }
 }
-
