@@ -29,7 +29,8 @@ namespace Security
                 new HillService(),
                 new AffineService(), 
                 new BeaufortService(),
-                new RsaService()
+                new RsaService(),
+                new AutoKeyService()
             };
 
             return new CipherFactory(services);
