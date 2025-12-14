@@ -6,9 +6,6 @@ namespace Security.Algorithms
 {
     public class AutoKeyCipher
     {
-        public string Text { get; set; }
-        public string Key { get; set; }
-
         static int ToNumber(char c) => c - 'A';
 
         public static string Encrypt(string text, string key)

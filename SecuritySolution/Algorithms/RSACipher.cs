@@ -22,6 +22,8 @@ namespace Security.Algorithms
         }
         public static string Encrypt(string text)
         {
+            if (text == null)
+                throw new ArgumentNullException("text");
             byte[] textBytes = Encoding.UTF8.GetBytes(text);
 
             BigInteger textNumber = BytesToBigInteger(textBytes, true);
@@ -35,6 +37,8 @@ namespace Security.Algorithms
         }
         public static string Decrypt(string encryptedText)
         {
+            if (encryptedText == null)
+                throw new ArgumentNullException("text");
             byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
 
             BigInteger encryptedNumber = BytesToBigInteger(encryptedBytes, true);

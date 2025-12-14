@@ -82,7 +82,9 @@ namespace Security.Algorithms
         }
         public static int ModInverse(int a)
         {
-            a = (a % CHAR_SET_SIZE + CHAR_SET_SIZE) % CHAR_SET_SIZE;
+            a = Normalize(a);
+            if (!HasModInv(a))
+                throw new Exception("No modular inverse exists.");
             for (int x = 1; x < CHAR_SET_SIZE; x++)
                 if ((a * x) % CHAR_SET_SIZE == 1)
                     return x;
@@ -90,7 +92,7 @@ namespace Security.Algorithms
         }
         public static int Determinant(int[,] m)
         {
-            return (m[0, 0] * m[1, 1] - m[0, 1] * m[1, 0]) % CHAR_SET_SIZE;
+            return (m[0, 0] * m[1, 1] % CHAR_SET_SIZE - m[0, 1] * m[1, 0] % CHAR_SET_SIZE + CHAR_SET_SIZE) % CHAR_SET_SIZE;
         }
         public static int[,] MatrixInverse(int[,] m)
         {
@@ -106,7 +108,7 @@ namespace Security.Algorithms
 
             for (int i = 0; i < MATRIX_SIZE; i++)
                 for (int j = 0; j < MATRIX_SIZE; j++)
-                    inv[i, j] = ((adj[i, j] * detInv) % CHAR_SET_SIZE + CHAR_SET_SIZE) % CHAR_SET_SIZE;
+                    inv[i, j] = Normalize(adj[i, j] * detInv);
 
             return inv;
         }
@@ -117,5 +119,9 @@ namespace Security.Algorithms
                 (m[1,0] * v[0] + m[1,1] * v[1]) % CHAR_SET_SIZE
             };
         }
+
+        private static bool HasModInv(int a) => Gcd(a, CHAR_SET_SIZE) == 1;
+        private static int Gcd(int a, int b) => b != 0 ? Gcd(b, a % b) : a;
+        private static int Normalize(int n) => (n % CHAR_SET_SIZE + CHAR_SET_SIZE) % CHAR_SET_SIZE;
     }
 }
