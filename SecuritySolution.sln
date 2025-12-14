@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "SecuritySolution\Security.csproj", "{7ED90E14-4DC5-4DB5-A512-C0A4246FADA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUNDB", "RUNDB\RUNDB.csproj", "{2FE03F1B-AF47-45D2-8201-22FF23FC196B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUNDB", "RUNDB\PreparePasswordsDB.csproj", "{2FE03F1B-AF47-45D2-8201-22FF23FC196B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

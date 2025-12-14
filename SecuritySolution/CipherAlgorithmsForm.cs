@@ -273,6 +273,11 @@ namespace Security
                 btnGenerateKey.Visible = false;
             }
 
+            if(svc is RsaService)
+            {
+                txtKey.Enabled = false;
+            }
+
             lblKeyHint.Text = $"Hint: {svc.KeyHint ?? "No key required"}";
 
             lblAlgorithmInfo.Text =

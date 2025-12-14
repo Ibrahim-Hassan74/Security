@@ -6,11 +6,12 @@ using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
 
-namespace PreparePasswordsDB {
+namespace RUNDB {
     class Program {
         // USER CONFIG
         const string ConnectionString = "Data Source=.;Initial Catalog=Security;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-        const string RockYouPath = @".\rockyou.txt";  // Relative path - place rockyou.txt in .\Security\RUNDB\bin\Debug\net8.0\
+        static string RockYouPath = Path.Combine(AppContext.BaseDirectory, "../../../rockyou.txt"); 
+        // @".\rockyou.txt";  // Relative path - place rockyou.txt in .\Security\RUNDB\bin\Debug\net8.0\
 
         // Tunables
         // Adjust memory used per chunk. DEFAULT: ~400 MB.

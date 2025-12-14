@@ -8,7 +8,7 @@ namespace Security.Service
     public class VigenereService : ICipherService
     {
         public string Id => "Vigenere";
-        public string Name => "Polyalphabetic (Vigenère)";
+        public string Name => "Vigenère";
         public bool RequiresKey => true;
         public string KeyHint => "letters";
 
