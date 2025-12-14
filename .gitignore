@@ -410,5 +410,5 @@ FodyWeavers.xsd
 **/appsettings.json
 **/appsettings.Development.json
 **/appsettings.Production.json
-# /RUNDB/rockyou.txt
-# /RUNDB/rockyou.txt
+/RUNDB/rockyou.txt
+/RUNDB/rockyou.txt
