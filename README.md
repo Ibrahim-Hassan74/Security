@@ -87,7 +87,6 @@ The solution matches a clean separation of concerns:
 
 ## 7. Screenshots
 
-_(Placeholders for future screenshots)_
 
 |          Main Interface           |          Algorithm Selection          |
 | :-------------------------------: | :-----------------------------------: |
