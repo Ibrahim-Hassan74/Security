@@ -5,7 +5,7 @@ using System;
 
 namespace Security.Service
 {
-    public class PolyalphabeticService : ICipherService
+    public class VigenereService : ICipherService
     {
         public string Id => "Vigenere";
         public string Name => "Polyalphabetic (Vigenère)";
@@ -17,7 +17,7 @@ namespace Security.Service
         public EncryptionResult Encrypt(string plaintext, string key = null)
         {
             if (string.IsNullOrEmpty(key)) throw new ArgumentException("Vigenère requires a key.");
-            var enc = PolyAlphabeticCipher.Encrypt(plaintext, key);
+            var enc = VigenereCipher.Encrypt(plaintext, key);
             return new EncryptionResult
             {
                 AlgorithmId = Id,
@@ -28,7 +28,7 @@ namespace Security.Service
 
         public string Decrypt(string ciphertext, string key)
         {
-            return PolyAlphabeticCipher.Decrypt(ciphertext, key);
+            return VigenereCipher.Decrypt(ciphertext, key);
         }
     }
 }

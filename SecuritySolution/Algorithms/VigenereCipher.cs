@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Security.Algorithms
 {
-    public class PolyAlphabeticCipher {
+    public class VigenereCipher {
         public string Text { get; set; }
         public string Key { get; set; }
 

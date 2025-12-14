@@ -29,13 +29,13 @@ The **Security Algorithms Suite** is a desktop tool designed for educational and
 
 | Algorithm          | Key Requirements        | Auto Key Gen | Notes                                                      |
 | ------------------ | ----------------------- | :----------: | ---------------------------------------------------------- |
-| **Affine**         | 2 integers (a, b)       |      ✅      | Requires `gcd(a, 26) == 1`.                                |
+| **Affine**         | 2 integers (a, b)       |      ✅      | Requires `gcd(a, 52) == 1`.                                |
 | **Auto-Key**       | String key              |      ❌      | Auto-key usage extending plaintext.                        |
 | **Beaufort**       | String key              |      ❌      | Similar to Vigenère but uses `(K - P) % 26`.               |
 | **Caesar**         | Integer shift           |      ❌      | Classic substitution cipher.                               |
 | **Hill**           | 4 integers (2x2 Matrix) |      ✅      | Uses matrix multiplication and modular inverse.            |
 | **Monoalphabetic** | Permuted Alphabet       |      ✅      | Replaces each letter with a unique mapped letter.          |
-| **PlayFair**       | String phrase           |      ❌      | Uses a 5x5 grid (combining I/J).                           |
+| **PlayFair**       | String phrase           |      ❌      | Uses a 6x6 grid                                            |
 | **Polyalphabetic** | String key              |      ❌      | Vigenère cipher implementation.                            |
 | **RSA**            | Public/Private Keys     |      ❌      | Uses large prime numbers (P, Q) and BigInteger arithmetic. |
 
@@ -94,7 +94,7 @@ The solution matches a clean separation of concerns:
 
 ## 8. How Algorithms Work
 
-- **Ceasar / Affine:** Mathematical substitution based on `(ax + b) % 26`.
+- **Ceasar:** Mathematical substitution based on `(ax + b) % 26`.
 - **Hill Cipher:** Uses linear algebra. Text is divided into vectors and multiplied by a Key Matrix modulo 26. Decryption requires the matrix inverse.
 - **RSA:** Asymmetric encryption.
   - Keys are derived from two large primes $P$ and $Q$.

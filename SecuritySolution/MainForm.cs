@@ -24,7 +24,7 @@ namespace Security
             {
                 new CaesarService(),
                 new MonoAlphabeticService(),
-                new PolyalphabeticService(),
+                new VigenereService(),
                 new PlayFairService(),
                 new HillService(),
                 new AffineService(), 
