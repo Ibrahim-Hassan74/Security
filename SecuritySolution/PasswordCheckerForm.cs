@@ -3,25 +3,23 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 
-namespace Security
-{
-    public partial class PasswordCheckerForm : KryptonForm
-    {
-        public PasswordCheckerForm()
-        {
+namespace Security {
+    public partial class PasswordCheckerForm : KryptonForm {
+        public PasswordCheckerForm() {
             InitializeComponent();
             InternalPanel.StateCommon.Color1 = Color.FromArgb(240, 240, 240);
             InternalPanel.StateCommon.Color2 = Color.FromArgb(240, 240, 240);
             txtPassword.TextChanged += txtPassword_TextChanged;
         }
 
-        private void TextBox_Enter(object sender, EventArgs e)
-        {
+        private void TextBox_Enter(object sender, EventArgs e) {
             var txt = sender as KryptonTextBox;
             if (txt == null) return;
 
@@ -29,8 +27,7 @@ namespace Security
             RemovePlaceholder(txt, placeholder);
         }
 
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
+        private void TextBox_Leave(object sender, EventArgs e) {
             var txt = sender as KryptonTextBox;
             if (txt == null) return;
 
@@ -38,38 +35,31 @@ namespace Security
             SetPlaceholder(txt, placeholder);
         }
 
-        private void SetPlaceholder(KryptonTextBox txt, string placeholder)
-        {
-            if (string.IsNullOrWhiteSpace(txt.Text))
-            {
+        private void SetPlaceholder(KryptonTextBox txt, string placeholder) {
+            if (string.IsNullOrWhiteSpace(txt.Text)) {
                 txt.Text = placeholder;
                 txt.StateCommon.Content.Color1 = Color.Gray;
             }
         }
 
-        private void RemovePlaceholder(KryptonTextBox txt, string placeholder)
-        {
-            if (txt.Text == placeholder)
-            {
+        private void RemovePlaceholder(KryptonTextBox txt, string placeholder) {
+            if (txt.Text == placeholder) {
                 txt.Text = "";
                 txt.StateCommon.Content.Color1 = Color.Black;
             }
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
+        private void txtPassword_TextChanged(object sender, EventArgs e) {
             if (txtPassword.Text == txtPassword.Tag?.ToString())
                 return;
 
             UpdatePasswordStrengthUI();
         }
 
-        private void btnCheck_Click(object sender, EventArgs e)
-        {
+        private void btnCheck_Click(object sender, EventArgs e) {
             string password = txtPassword.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(password))
-            {
+            if (string.IsNullOrWhiteSpace(password)) {
                 MessageBox.Show("Please enter a password first.");
                 return;
             }
@@ -91,14 +81,12 @@ namespace Security
                 lblStrength.ForeColor = Color.Green;
         }
 
-        private void SetLabelState(Label lbl, bool condition, string okText, string badText)
-        {
+        private void SetLabelState(Label lbl, bool condition, string okText, string badText) {
             lbl.Text = condition ? okText : badText;
             lbl.ForeColor = condition ? Color.Green : Color.Red;
         }
 
-        public class Evaluation
-        {
+        public class Evaluation {
             public int Score { get; set; }
             public bool HasLower { get; set; }
             public bool HasUpper { get; set; }
@@ -106,16 +94,13 @@ namespace Security
             public bool HasSymbol { get; set; }
             public double Entropy { get; set; }
         }
-        static Evaluation GetEvaluation(string password, bool isRealTime = false)
-        {
-            bool PasswordExists(string plaintext)
-            {
+        static Evaluation GetEvaluation(string password, bool isRealTime = false) {
+            bool PasswordExists(string plaintext) {
                 var ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                 if (plaintext == null) throw new ArgumentNullException(nameof(plaintext));
 
                 byte[] hash;
-                using (var sha = SHA1.Create())
-                {
+                using (var sha = SHA1.Create()) {
                     hash = sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(plaintext.Trim()));
                 }
 
@@ -139,8 +124,7 @@ namespace Security
             if (password.Length < 8)
                 score -= 20;
 
-            if (!isRealTime)
-            {
+            if (!isRealTime) {
                 if (PasswordExists(password))
                     score -= 10000000;
             }
@@ -153,24 +137,21 @@ namespace Security
             var eval = new Evaluation();
             int charSetSize = 0;
 
-            if (password.Any(char.IsUpper))
-            {
+            if (password.Any(char.IsUpper)) {
                 score += 10;
                 eval.HasUpper = true;
                 charSetSize += 26;
             }
             else score -= 10;
 
-            if (password.Any(char.IsLower))
-            {
+            if (password.Any(char.IsLower)) {
                 score += 10;
                 eval.HasLower = true;
                 charSetSize += 26;
             }
             else score -= 10;
 
-            if (password.Any(char.IsNumber))
-            {
+            if (password.Any(char.IsNumber)) {
                 score += 10;
                 eval.HasNumber = true;
                 charSetSize += 10;
@@ -178,8 +159,7 @@ namespace Security
             else score -= 10;
 
             string symbols = "!@#$%^&*()-_=+[]{};:'\",.<>?/\\|`~";
-            if (password.Any(c => symbols.Contains(c)))
-            {
+            if (password.Any(c => symbols.Contains(c))) {
                 score += 15;
                 eval.HasSymbol = true;
                 charSetSize += symbols.Length;
@@ -199,8 +179,7 @@ namespace Security
             return eval;
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
+        private void btnClear_Click(object sender, EventArgs e) {
             txtPassword.Text = "";
             txtPassword.ForeColor = Color.Black;
 
@@ -222,12 +201,10 @@ namespace Security
             lblHasNumber.ForeColor = defaultColor;
             lblHasSymbol.ForeColor = defaultColor;
         }
-        private void UpdatePasswordStrengthUI()
-        {
+        private void UpdatePasswordStrengthUI() {
             string password = txtPassword.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(password))
-            {
+            if (string.IsNullOrWhiteSpace(password)) {
                 lblStrength.Text = "";
                 lblHasUpper.Text = "";
                 lblHasLower.Text = "";
@@ -254,6 +231,55 @@ namespace Security
 
         }
 
+        private bool IsPwnedPasswordsTableLoaded() {
+            try {
+                var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                using var conn = new SqlConnection(connectionString);
+                conn.Open();
+
+                // Check if table exists AND has data
+                using var cmd = new SqlCommand(
+                    @"SELECT CASE 
+                WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES 
+                            WHERE TABLE_NAME = 'pwned_passwords') 
+                AND EXISTS (SELECT 1 FROM dbo.pwned_passwords)
+                THEN 1 
+                ELSE 0 
+              END", conn);
+
+                var result = cmd.ExecuteScalar();
+                return Convert.ToInt32(result) == 1;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        private void PasswordCheckerForm_Load(object sender, EventArgs e) {
+            if (!IsPwnedPasswordsTableLoaded()) {
+                var result = MessageBox.Show(
+                    "The pwned passwords database is not loaded.\n\nDo you want to load it now? (This may take several minutes)",
+                    "Database Not Loaded",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes) {
+                    try {
+                        // Path to RUNDB.exe
+                        string rundbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\..\\RUNDB\\bin\\Debug\\net8.0\\PreparePasswordsDB.exe");
+                        Process.Start(new ProcessStartInfo {
+                            FileName = rundbPath,
+                            UseShellExecute = true,
+                            CreateNoWindow = false
+                        });
+                        MessageBox.Show("RUNDB started. Please wait for it to complete, then restart this form.", "Info");
+                    }
+                    catch (Exception ex) {
+                        MessageBox.Show($"Failed to start RUNDB: {ex.Message}", "Error");
+                    }
+                }
+            }
+        }
     }
 }
 

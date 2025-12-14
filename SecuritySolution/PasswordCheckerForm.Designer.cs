@@ -29,8 +29,7 @@ namespace Security
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             txtPassword = new Krypton.Toolkit.KryptonTextBox();
             lblStrength = new System.Windows.Forms.Label();
             btnCheck = new Krypton.Toolkit.KryptonButton();
@@ -191,6 +190,7 @@ namespace Security
             StateCommon.Header.Border.Color1 = SystemColors.ButtonFace;
             StateCommon.Header.Border.Color2 = SystemColors.ButtonFace;
             Text = "Password Checker";
+            Load += PasswordCheckerForm_Load;
             ResumeLayout(false);
             PerformLayout();
 

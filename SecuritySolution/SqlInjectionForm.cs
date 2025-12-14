@@ -10,12 +10,10 @@ using System.Windows.Forms;
 
 namespace Security
 {
-    public partial class SqlInjectionForm : KryptonForm
-    {
+    public partial class SqlInjectionForm : KryptonForm {
         private readonly ApplicationDbContext _db;
 
-        public SqlInjectionForm(ApplicationDbContext db)
-        {
+        public SqlInjectionForm(ApplicationDbContext db) {
             _db = db;
             InitializeComponent();
 
@@ -33,66 +31,54 @@ namespace Security
             RefreshPasswordsGrid();
         }
 
-        private void TextBox_Enter(object sender, EventArgs e)
-        {
+        private void TextBox_Enter(object sender, EventArgs e) {
             var txt = sender as KryptonTextBox;
             if (txt == null) return;
             string placeholder = txt.Tag?.ToString() ?? "";
             RemovePlaceholder(txt, placeholder);
         }
 
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
+        private void TextBox_Leave(object sender, EventArgs e) {
             var txt = sender as KryptonTextBox;
             if (txt == null) return;
             string placeholder = txt.Tag?.ToString() ?? "";
             SetPlaceholder(txt, placeholder);
         }
 
-        private void SetPlaceholder(KryptonTextBox txt, string placeholder)
-        {
-            if (string.IsNullOrWhiteSpace(txt.Text))
-            {
+        private void SetPlaceholder(KryptonTextBox txt, string placeholder) {
+            if (string.IsNullOrWhiteSpace(txt.Text)) {
                 txt.Text = placeholder;
                 txt.StateCommon.Content.Color1 = Color.Gray;
             }
         }
 
-        private void RemovePlaceholder(KryptonTextBox txt, string placeholder)
-        {
-            if (txt.Text == placeholder)
-            {
+        private void RemovePlaceholder(KryptonTextBox txt, string placeholder) {
+            if (txt.Text == placeholder) {
                 txt.Text = "";
                 txt.StateCommon.Content.Color1 = Color.Black;
             }
         }
 
-        private void btnExecuteQuery_Click(object sender, EventArgs e)
-        {
+        private void btnExecuteQuery_Click(object sender, EventArgs e) {
             string placeholder = txtRawSqlInput.Tag?.ToString() ?? "";
             string input = txtRawSqlInput.Text?.Trim() ?? "";
 
-            if (string.IsNullOrWhiteSpace(input) || input == placeholder)
-            {
+            if (string.IsNullOrWhiteSpace(input) || input == placeholder) {
                 MessageBox.Show("Please enter a query or password in the text box.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (chkEnableInjectionMode.Checked)
-            {
+            if (chkEnableInjectionMode.Checked) {
                 InsertPassword_Vulnerable(input);
             }
-            else
-            {
+            else {
                 InsertPassword_Secure(input);
             }
-            RefreshPasswordsGrid();
+            btnReloadTable.PerformClick();
         }
 
-        private void InsertPassword_Secure(string passwordValue)
-        {
-            try
-            {
+        private void InsertPassword_Secure(string passwordValue) {
+            try {
                 var pw = new Password { Password1 = passwordValue };
                 _db.Passwords.Add(pw);
                 _db.SaveChanges();
@@ -103,22 +89,19 @@ namespace Security
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 MessageBox.Show("Secure insert error:\n" + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void InsertPassword_Vulnerable(string passwordValue)
-        {
+        private void InsertPassword_Vulnerable(string passwordValue) {
             var conn = _db.Database.GetDbConnection();
 
             string sql =
                 $"INSERT INTO Passwords (Password) VALUES ('{passwordValue}')";
 
-            try
-            {
+            try {
                 using var cmd = conn.CreateCommand();
                 cmd.CommandText = sql;
                 cmd.CommandType = CommandType.Text;
@@ -134,8 +117,7 @@ namespace Security
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
-            catch (SqlException ex)
-            {
+            catch (SqlException ex) {
                 MessageBox.Show(
                     "SQL Injection triggered!\n\n" + ex.Message,
                     "SQL ERROR (VULNERABLE)",
@@ -144,10 +126,8 @@ namespace Security
             }
         }
 
-        private void RefreshPasswordsGrid()
-        {
-            try
-            {
+        private void RefreshPasswordsGrid() {
+            try {
                 var list = _db.Passwords
                     .AsNoTracking()
                     .OrderByDescending(p => p.Id)
@@ -157,16 +137,13 @@ namespace Security
 
                 dgvPasswordTable.DataSource = list;
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 dgvPasswordTable.DataSource = null;
             }
         }
 
-        private void btnReloadTable_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void btnReloadTable_Click(object sender, EventArgs e) {
+            try {
                 _db.Database.ExecuteSqlRaw(
                     @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Passwords')
                       BEGIN
@@ -178,13 +155,15 @@ namespace Security
                 );
 
                 RefreshPasswordsGrid();
-                MessageBox.Show("Password table reloaded!", "DONE");
+                //MessageBox.Show("Password table reloaded!", "DONE");
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 MessageBox.Show("Error recreating table:\n" + ex.Message);
             }
         }
 
+        private void SqlInjectionForm_Load(object sender, EventArgs e) {
+            btnReloadTable.PerformClick();
+        }
     }
 }

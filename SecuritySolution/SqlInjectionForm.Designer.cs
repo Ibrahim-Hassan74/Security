@@ -28,8 +28,7 @@ namespace Security
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             txtRawSqlInput = new Krypton.Toolkit.KryptonTextBox();
             lblSqlInputLabel = new System.Windows.Forms.Label();
             btnExecuteQuery = new Krypton.Toolkit.KryptonButton();
@@ -171,6 +170,7 @@ namespace Security
             StateCommon.Header.Border.Color1 = System.Drawing.SystemColors.ButtonFace;
             StateCommon.Header.Border.Color2 = System.Drawing.SystemColors.ButtonFace;
             Text = "Sql Injection";
+            Load += SqlInjectionForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPasswordTable).EndInit();
             ResumeLayout(false);
             PerformLayout();
