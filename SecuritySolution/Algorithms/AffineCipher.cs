@@ -41,16 +41,16 @@ namespace Security.Algorithms
         private static int ToNumber(char c)
         {
             if (c >= 'a' && c <= 'z')
-                return c - 'a';
-            return c - 'A' + 26;
+                return c - 'a'; // a - a = 0, z - a = 25
+            return c - 'A' + 26; // A - A + 26 = 26, Z - A + 26 = 51
         }
         private static char ToChar(int n)
         {
             if (n < 0 || n >= CHAR_SET_SIZE)
                 throw new ArgumentOutOfRangeException("n");
             if (n < 26)
-                return (char)(n + 'a');
-            return (char)(n - 26 + 'A');
+                return (char)(n + 'a'); // 0 + a = a, 25 + a = z
+            return (char)(n - 26 + 'A'); // 26 - 26 + A = A, 51 - 26 + A = Z
         }
         private static bool ValidChar(char c) => (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
         private static bool ValidText(string text)

@@ -107,7 +107,7 @@ namespace Security
                 return;
             }
 
-            if (svc.Name == "Polyalphabetic (Vigenère)")
+            if (svc.Name == "Vigenère")
             {
                 string key = txtKey.Text;
                 if (!string.IsNullOrEmpty(key))

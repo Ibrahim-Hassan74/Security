@@ -10,7 +10,7 @@ namespace Security.ServiceContract
 
         bool RequiresKey { get; }
 
-        string KeyHint { get; }
+        string KeyHint { get; } 
 
         string GenerateKey();
 
