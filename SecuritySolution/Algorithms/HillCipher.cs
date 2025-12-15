@@ -43,7 +43,7 @@ namespace Security.Algorithms
         public static string Decrypt(string text, List<int> matrix_values)
         {
             if (String.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
-            if (!ValidText(text))
+            if (!ValidKey(text))
                 throw new ArgumentException("text must contain only upper case english letters");
             if (text.Length % 2 != 0)
                 throw new ArgumentException("the text must be of even length");
@@ -76,6 +76,15 @@ namespace Security.Algorithms
             }
             return true;
         }
+
+        private static bool ValidKey(string text) {
+            foreach (char c in text) {
+                if (!ValidChar(c) && c != Filler)
+                    return false;
+            }
+            return true;
+        }
+
         private static (char, char) GetPair(int[] v)
         {
             return ((char)(v[0] + 'A'), v[1] == 26 ? Filler : (char)(v[1] + 'A'));

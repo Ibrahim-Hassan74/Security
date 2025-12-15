@@ -67,9 +67,15 @@ The solution matches a clean separation of concerns:
 2. **Open the Solution:**
    - Navigate to the folder and open `SecuritySolution.sln` in Visual Studio.
 3. **Restore Dependencies:**
-   - Visual Studio should automatically restore NuGet packages (Krypton, MathNet.Numerics).
+   - Visual Studio should automatically restore NuGet packages (Krypton).
    - If not, run: `dotnet restore` in the Package Manager Console.
-4. **Run the Application:**
+4. **Setting up the database**
+   - download [rockyou.txt](https://drive.google.com/drive/folders/11_JyS9_hfoxz5AG1BFpK18agvTm4V5HX)
+   - place rockyou.txt in ./Security/RUNDB/
+   - right click on PreparePasswordsDB and select "set as startup project"
+   - run PreparePasswordsDB.cs project to load the database
+   - if the run throws an exception create a database called Security and run again
+5. **Run the Application:**
    - Set `SecuritySolution` as the Startup Project.
    - Press **F5** or click **Start**.
 
